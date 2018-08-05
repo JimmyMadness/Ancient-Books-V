@@ -1,0 +1,311 @@
+@font-face{
+	font-family: Minecraft;
+	src:url('Minecraft.ttf');
+}
+
+.root { -fx-focus-color: transparent; }
+
+.label{
+	-fx-font-family: Minecraft;	
+	-fx-text-fill: white;
+	-fx-prompt-text-fill: white;
+	
+}
+
+.labelmain:hover{
+	-fx-text-fill: yellow;
+	-fx-font-size: 25px;
+	
+}
+
+.text-field{
+	-fx-font-family: Minecraft;
+	-fx-text-fill: white;
+	-fx-font-size: 24px;
+	-fx-background-color: #222222;
+}
+
+.small{
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+.text-field:focused{
+
+	
+}
+
+.button{
+	-fx-font-family: Minecraft;
+		-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-effect: dropshadow(one-pass-box,dimgrey,3,1.0,2,2);
+	-fx-background-color: darkgrey;
+
+}
+
+.button:disabled{
+	
+}
+
+.button:hover{
+		-fx-text-fill: yellow;
+}
+
+.button:focused{
+		-fx-background-color: darkgrey;
+}
+
+.button:pressed{
+	-fx-translate-y: 1;
+	-fx-translate-x: 1;
+	-fx-effect: dropshadow(one-pass-box,dimgrey,3,1.0,1,1);
+	
+}
+
+.button:show-mnemonic{
+	
+}
+
+.uparrow{
+	   -fx-background-size: cover;
+	   -fx-background-repeat: no-repeat;
+	   -fx-background-position: center ;
+	   -fx-background-image: url("images/uparrow.jpg");
+
+	
+	
+}
+
+.uparrow:hover{
+		   -fx-background-image: url("images/uparrowyellow.jpg");
+		   	   -fx-background-repeat: no-repeat;
+	   -fx-background-size: cover;
+	   -fx-background-position: center;
+}
+
+
+.downarrow{
+		   -fx-background-size: cover;
+	   -fx-background-repeat: no-repeat;
+	   -fx-background-position: center ;
+	   -fx-background-image: url("images/downarrow.jpg");
+	
+}
+
+.downarrow:hover{
+		   -fx-background-image: url("images/downarrowyellow.jpg");
+		   	   -fx-background-repeat: no-repeat;
+	   -fx-background-size: cover;
+	   -fx-background-position: center;
+}
+
+
+.radio-button{
+		-fx-font-family: Minecraft;	
+		-fx-font-size: 15px;
+	-fx-text-fill: white;
+	
+}
+
+.radio-button .radio{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: darkgrey;
+	
+}
+
+.radio-button .dot{
+	-fx-shape: "M2,0L5,4L8,0L10,0L10,2L6,5L10,8L10,10L8,10L5,6L2,10L0,10L0,8L4,5L0,2L0,0Z";
+	
+}
+
+.radio-button:selected .dot{
+	-fx-background-color: black;
+}
+.radio-button:hover{
+	
+}
+.radio-button:focus{
+	
+}
+
+.list-view{
+	-fx-font-family: Minecraft;	
+	 -fx-focus-color: transparent;
+	 -fx-background-insets: 0;
+	  -fx-padding: 0;
+
+}
+.list-view:focus{
+	
+}
+
+.list-view .list-cell:even{
+	-fx-font-size: 18px;
+	-fx-text-fill: white;
+	-fx-background-color: #222222;
+	-fx-padding: 5px, 5px, 5px, 5px;
+	-fx-border-color: white;
+	-fx-border-width: 2px;
+}
+
+.list-view .list-cell:even:hover{
+	-fx-text-fill: yellow;
+}
+
+.list-view .list-cell:odd:hover{
+	-fx-text-fill: yellow;
+}
+
+
+.list-view .list-cell:filled:selected{
+	-fx-text-fill: white;
+	-fx-border-color: yellow;
+}
+
+.list-view .list-cell:odd{
+	-fx-font-size: 18px;
+	-fx-text-fill: white;
+	-fx-background-color: #222222;
+	-fx-padding: 5px, 5px, 5px, 5px;
+	-fx-border-color: white;
+	-fx-border-width: 2px;
+}
+
+.list-view .list-cell:empty {
+    -fx-background-color: black;
+    	-fx-border-color: black;
+}
+.list-view .scroll-bar:vertical{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: dimgrey;
+}
+
+.list-view .scroll-bar .decrement-button{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: darkgrey;
+	-fx-border-color: darkgrey;
+}
+.list-view .scroll-bar .decrement-arrow{
+	-fx-background-color: black;
+}
+.list-view .scroll-bar .decrement-arrow:hover{
+	-fx-background-color: yellow;
+}
+
+.list-view .scroll-bar .increment-button{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: darkgrey;
+	-fx-border-color: darkgrey;
+}
+.list-view .scroll-bar .increment-arrow{
+	-fx-background-color: black;
+}
+.list-view .scroll-bar .increment-arrow:hover{
+	-fx-background-color: yellow;
+}
+
+.list-view .scroll-bar .thumb{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color:lightgrey;
+}
+
+
+.pane{
+	-fx-border-color: white;
+	-fx-border-width: 5px;
+}
+
+
+.choice-box .context-menu {
+	-fx-background-color: #222222;
+	-fx-font-size: 15px;
+}
+
+.choice-box .menu-item:focused {
+	-fx-background-color: darkgray;
+	-fx-font-size: 15px;
+}
+
+.choice-box .menu-item > .label {
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+.choice-box .menu-item:focused > .label { 
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+.choice-box {
+  -fx-background-color: #222222;
+  -fx-mark-color: white; 
+  -fx-font-size: 15px;
+}
+
+.choice-box:hover{
+	-fx-mark-color: yellow;
+	-fx-font-size: 15px;
+}
+
+
+.choice-box > .label {
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+
+.text-area {
+	-fx-highlight-fill: black;
+  -fx-highlight-text-fill: white;
+	
+		-fx-font-family: Minecraft;	
+			-fx-font-size: 15px;
+		-fx-text-fill: white;
+	 -fx-focus-color: transparent;
+	 -fx-background-insets: 0;
+	  -fx-padding: 0;
+}
+
+.text-area .scroll-pane{
+
+}
+
+.text-area .scroll-bar:vertical{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: dimgrey;
+}
+
+.text-area .scroll-bar .decrement-button{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: darkgrey;
+	-fx-border-color: darkgrey;
+}
+.text-area .scroll-bar .decrement-arrow{
+	-fx-background-color: black;
+}
+.text-area .scroll-bar .decrement-arrow:hover{
+	-fx-background-color: yellow;
+}
+
+.text-area .scroll-bar .increment-button{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: darkgrey;
+	-fx-border-color: darkgrey;
+}
+.text-area .scroll-bar .increment-arrow{
+	-fx-background-color: black;
+}
+.text-area .scroll-bar .increment-arrow:hover{
+	-fx-background-color: yellow;
+}
+
+.text-area .scroll-bar .thumb{
+	-fx-shape:   "M0,0h10v10h-10v-10";
+	-fx-background-color: darkgrey;
+}
+
+
+.text-area .content{
+
+	-fx-background-color: black;
+}

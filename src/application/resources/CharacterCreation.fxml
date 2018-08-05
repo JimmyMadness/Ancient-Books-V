@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import textfield.TextField20?>
+<?import textfield.TextFieldNum?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@MainStyle.css">
+         <top>
+            <HBox alignment="CENTER_LEFT" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Name:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField20 prefHeight="51.0" prefWidth="423.0" promptText="Sir Fucksalot" />
+                  <VBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" selected="true" text="M">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="sex" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="F" toggleGroup="$sex">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </VBox>
+                  <Label text="Age:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <TextFieldNum prefHeight="51.0" prefWidth="93.0" promptText="18-99" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </top>
+         <left>
+            <HBox prefHeight="539.0" prefWidth="251.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="539.0" prefWidth="231.0">
+                     <children>
+                        <Label text="Characteristics">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Avaiable">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="73.0" prefWidth="25.0" />
+                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="91.0" text="100" />
+                              <Region prefHeight="73.0" prefWidth="25.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Strength">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="85.0" prefWidth="25.0" />
+                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="59.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Dexterity">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="85.0" prefWidth="22.0" />
+                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Constitution">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="85.0" prefWidth="2.0" />
+                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Intelligence">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="85.0" prefWidth="5.0" />
+                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Charisma">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="85.0" prefWidth="21.0" />
+                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Luck">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="85.0" prefWidth="59.0" />
+                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Region prefHeight="539.0" prefWidth="17.0" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+               </children>
+            </HBox>
+         </left>
+         <right>
+            <HBox prefWidth="251.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <padding>
+                        <Insets left="2.0" />
+                     </padding>
+                  </Separator>
+                  <Region prefHeight="200.0" prefWidth="17.0" />
+                  <VBox alignment="CENTER" prefHeight="539.0" prefWidth="231.0" spacing="10.0">
+                     <children>
+                        <Label text="Class">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="classList" prefHeight="409.0" prefWidth="231.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <Button alignment="CENTER" mnemonicParsing="false" onMouseReleased="#toSkills" prefHeight="28.0" prefWidth="163.0" text="Next">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </right>
+         <center>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="60.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="345.0" prefWidth="297.0" style="-fx-border-width: 5px; -fx-border-color: white;">
+                     <children>
+                        <ImageView fitHeight="336.0" fitWidth="286.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@images/warrior1.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Button alignment="CENTER" mnemonicParsing="false" onMouseReleased="#toChangeChPicture" prefHeight="28.0" prefWidth="163.0" text="Choose Picture">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="40.0" />
+               </padding>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

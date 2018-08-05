@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="600.0" maxWidth="800.0" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutY="14.0" maxHeight="600.0" maxWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;">
+         <bottom>
+            <HBox alignment="CENTER_LEFT" prefHeight="128.0" prefWidth="809.0" spacing="40.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Attack" />
+                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Run Away" />
+                  <Region prefHeight="128.0" prefWidth="161.0" />
+                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Go back to village" />
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+         </bottom>
+         <right>
+            <HBox prefHeight="439.0" prefWidth="393.0" spacing="20.0" style="-fx-border-color: darkgrey; -fx-border-width: 5px;">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="439.0" prefWidth="144.0" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="161.0" fitWidth="138.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@images/testcave2.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Character" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Inventory" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Menu" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="174.0" prefWidth="233.0">
+                     <children>
+                        <Label text="Jimmy Madness Puzza">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="150.0" fitWidth="155.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@images/warrior1.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label text="Warrior Lvl 1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="10/10 Hp">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="0 Xp">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </right>
+         <left>
+            <VBox prefHeight="472.0" prefWidth="406.0" style="-fx-border-color: darkgrey; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="The caverns Below">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <TextArea prefHeight="434.0" prefWidth="395.0" />
+               </children>
+            </VBox>
+         </left></BorderPane>
+   </children>
+</AnchorPane>
