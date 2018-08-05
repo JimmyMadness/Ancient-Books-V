@@ -22,7 +22,7 @@
                   <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Attack" />
                   <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Run Away" />
                   <Region prefHeight="128.0" prefWidth="161.0" />
-                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Go back to village" />
+                  <Button mnemonicParsing="false" onMouseReleased="#toVillage" prefHeight="43.0" prefWidth="153.0" text="Go back to village" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -39,8 +39,8 @@
                               <Image url="@images/testcave2.jpg" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Character" />
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Inventory" />
+                        <Button mnemonicParsing="false" onMouseReleased="#toCharacterPage" prefHeight="35.0" prefWidth="117.0" text="Character" />
+                        <Button mnemonicParsing="false" onMouseReleased="#toInventory" prefHeight="35.0" prefWidth="117.0" text="Inventory" />
                         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Menu" />
                      </children>
                   </VBox>
@@ -77,7 +77,7 @@
             </HBox>
          </right>
          <left>
-            <VBox prefHeight="472.0" prefWidth="406.0" style="-fx-border-color: darkgrey; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
+            <VBox maxWidth="406.0" minWidth="406.0" prefHeight="472.0" prefWidth="406.0" style="-fx-border-color: darkgrey; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
                <children>
                   <Label text="The caverns Below">
                      <font>

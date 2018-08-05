@@ -23,8 +23,11 @@ import javafx.util.Duration;
 public class ViewController {
 	
 private ChangeViewListener changeViewListener;
+private GameLocation gameLocation;
 
 	
+
+
 	@FXML
 	private Label labelBeginning1;
 	@FXML
@@ -108,6 +111,14 @@ private ChangeViewListener changeViewListener;
 			
 	}
 	
+	public GameLocation getGameLocation() {
+		return gameLocation;
+	}
+
+	public void setGameLocation(GameLocation gameLocation) {
+		this.gameLocation = gameLocation;
+	}
+
 	@FXML
 	public void closeChPicture(Event e) {
 		if (changeViewListener !=null) {
@@ -158,6 +169,13 @@ private ChangeViewListener changeViewListener;
 	}
 	
 	@FXML
+	public void toSkills(Event e) {
+		if (changeViewListener != null) {
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.SKILLS));
+		}
+	}
+	
+	@FXML
 	public void toVillage(Event e) {
 		if (changeViewListener != null) {
 			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.VILLAGE));
@@ -165,9 +183,33 @@ private ChangeViewListener changeViewListener;
 	}
 	
 	@FXML
-	public void toSkills(Event e) {
+	public void toDungeon(Event e) {
 		if (changeViewListener != null) {
-			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.SKILLS));
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.DUNGEON));
+		}
+	}
+	
+	@FXML
+	public void toCharacterPage(Event e) {
+		if (changeViewListener != null) {
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CHARACTERPAGE));
+		}
+	}
+	
+	@FXML
+	public void toInventory(Event e) {
+		if (changeViewListener != null) {
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.INVENTORY));
+		}
+	}
+
+	@FXML
+	public void toGameView(Event e) {
+		if (changeViewListener != null) {
+			if (gameLocation == GameLocation.VILLAGE) 
+				changeViewListener.onChangeView(new ChangeViewEvent(this, Views.VILLAGE));
+			if (gameLocation == GameLocation.DUNGEON)
+				changeViewListener.onChangeView(new ChangeViewEvent(this, Views.DUNGEON));
 		}
 	}
 	

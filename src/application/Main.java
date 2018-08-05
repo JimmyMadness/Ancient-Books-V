@@ -43,6 +43,15 @@ public class Main extends Application implements ChangeViewListener{
 	private AnchorPane villagePane;
 	private Scene villageScene;
 	
+	private AnchorPane dungeonPane;
+	private Scene dungeonScene;
+	
+	private AnchorPane chPagePane;
+	private Scene chPageScene;
+	
+	private AnchorPane inventoryPane;
+	private Scene inventoryScene;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		viewController = new ViewController();
@@ -91,6 +100,21 @@ public class Main extends Application implements ChangeViewListener{
 			loader.setController(viewController);
 			villagePane = (AnchorPane)loader.load();
 			villageScene = new Scene(villagePane);
+			
+			loader = new FXMLLoader(Main.class.getResource("resources/Dungeon.fxml"));
+			loader.setController(viewController);
+			dungeonPane = (AnchorPane)loader.load();
+			dungeonScene = new Scene(dungeonPane);
+			
+			loader = new FXMLLoader(Main.class.getResource("resources/CharacterPage.fxml"));
+			loader.setController(viewController);
+			chPagePane = (AnchorPane)loader.load();
+			chPageScene = new Scene(chPagePane);
+			
+			loader = new FXMLLoader(Main.class.getResource("resources/Inventory.fxml"));
+			loader.setController(viewController);
+			inventoryPane = (AnchorPane)loader.load();
+			inventoryScene = new Scene(inventoryPane);
 			
 			this.primaryStage = primaryStage;
 			this.primaryStage.initStyle(StageStyle.UNIFIED);
@@ -170,12 +194,36 @@ public class Main extends Application implements ChangeViewListener{
 		primaryStage.show();
 		villagePane.requestFocus();
 		villagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		viewController.setGameLocation(GameLocation.VILLAGE);
 	}	
 	
+	private void showDungeon() {
+		primaryStage.setScene(dungeonScene);
+		primaryStage.show();
+		dungeonPane.requestFocus();
+		dungeonPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);	
+		viewController.setGameLocation(GameLocation.DUNGEON);
+	}
+	
+	private void showCharacterPage() {
+		primaryStage.setScene(chPageScene);
+		primaryStage.show();
+		chPagePane.requestFocus();
+		chPagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		
+	}
+	
+	private void showInventory() {
+		primaryStage.setScene(inventoryScene);
+		primaryStage.show();
+		inventoryPane.requestFocus();
+		inventoryPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		
+	}
 
 	@Override
 	public void onChangeView(ChangeViewEvent event) {
-		if(event.getView().equals(Views.NEWGAME)) {
+/*		if(event.getView().equals(Views.NEWGAME)) {
 			showNewGame();
 		}
 		if(event.getView().equals(Views.MAINMENU)) {
@@ -199,10 +247,39 @@ public class Main extends Application implements ChangeViewListener{
 		if(event.getView().equals(Views.VILLAGE)) {
 			showVillage();
 		}
+		if(event.getView().equals(Views.DUNGEON)) {
+			showDungeon();
+		}
+		if(event.getView().equals(Views.CHARACTERPAGE)) {
+			showCharacterPage();
+		}*/
+		switch (event.getView()) {
+			case NEWGAME: showNewGame();
+			break;
+			case MAINMENU: showMainMenu();
+			break;
+			case BEGINNING: showBeginning();
+			break;
+			case CHCREATION: showChCreation();
+			break;
+			case CHANGECHPICTURE: showChangeChPicture();
+			break;
+			case CLOSECHANGECHPICTURE: closeChangeChPicture();
+			break;
+			case SKILLS: showSkills();
+			break;
+			case VILLAGE: showVillage();
+			break;
+			case DUNGEON: showDungeon();
+			break;
+			case CHARACTERPAGE: showCharacterPage();
+			break;
+			case INVENTORY: showInventory();
+			break;
+		
+		}
+		
 	}
-
-
-
 
 
 
