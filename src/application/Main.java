@@ -43,6 +43,12 @@ public class Main extends Application implements ChangeViewListener{
 	private AnchorPane villagePane;
 	private Scene villageScene;
 	
+	private AnchorPane dungeonPane;
+	private Scene dungeonScene;
+	
+	private AnchorPane chPagePane;
+	private Scene chPageScene;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		viewController = new ViewController();
@@ -91,6 +97,16 @@ public class Main extends Application implements ChangeViewListener{
 			loader.setController(viewController);
 			villagePane = (AnchorPane)loader.load();
 			villageScene = new Scene(villagePane);
+			
+			loader = new FXMLLoader(Main.class.getResource("resources/Dungeon.fxml"));
+			loader.setController(viewController);
+			dungeonPane = (AnchorPane)loader.load();
+			dungeonScene = new Scene(dungeonPane);
+			
+			loader = new FXMLLoader(Main.class.getResource("resources/CharacterPage.fxml"));
+			loader.setController(viewController);
+			chPagePane = (AnchorPane)loader.load();
+			chPageScene = new Scene(chPagePane);
 			
 			this.primaryStage = primaryStage;
 			this.primaryStage.initStyle(StageStyle.UNIFIED);
@@ -170,8 +186,24 @@ public class Main extends Application implements ChangeViewListener{
 		primaryStage.show();
 		villagePane.requestFocus();
 		villagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		viewController.setGameLocation(GameLocation.VILLAGE);
 	}	
 	
+	private void showDungeon() {
+		primaryStage.setScene(dungeonScene);
+		primaryStage.show();
+		dungeonPane.requestFocus();
+		dungeonPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);	
+		viewController.setGameLocation(GameLocation.DUNGEON);
+	}
+	
+	private void showCharacterPage() {
+		primaryStage.setScene(chPageScene);
+		primaryStage.show();
+		chPagePane.requestFocus();
+		chPagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		
+	}
 
 	@Override
 	public void onChangeView(ChangeViewEvent event) {
@@ -199,7 +231,21 @@ public class Main extends Application implements ChangeViewListener{
 		if(event.getView().equals(Views.VILLAGE)) {
 			showVillage();
 		}
+		if(event.getView().equals(Views.DUNGEON)) {
+			showDungeon();
+		}
+		if(event.getView().equals(Views.CHARACTERPAGE)) {
+			showCharacterPage();
+		}
 	}
+
+
+
+
+
+
+
+
 
 
 

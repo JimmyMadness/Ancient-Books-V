@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane layoutY="14.0" maxHeight="600.0" maxWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;">
          <bottom>
@@ -22,7 +22,7 @@
                   <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Buy" />
                   <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Show your items" />
                   <Region prefHeight="128.0" prefWidth="161.0" />
-                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Go Adventuring" />
+                  <Button mnemonicParsing="false" onMouseReleased="#toDungeon" prefHeight="43.0" prefWidth="153.0" text="Go Adventuring" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -39,7 +39,7 @@
                               <Image url="@images/village.jpg" />
                            </image>
                         </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Character" />
+                        <Button mnemonicParsing="false" onMouseReleased="#toCharacterPage" prefHeight="35.0" prefWidth="117.0" text="Character" />
                         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Inventory" />
                         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Menu" />
                      </children>
@@ -77,14 +77,14 @@
             </HBox>
          </right>
          <left>
-            <VBox style="-fx-border-color: darkgrey; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
+            <VBox maxWidth="406.0" minWidth="406.0" prefWidth="406.0" style="-fx-border-color: darkgrey; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Vendor's Items">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <ListView prefHeight="472.0" prefWidth="406.0" />
+                  <ListView prefHeight="472.0" prefWidth="395.0" />
                </children>
             </VBox>
          </left></BorderPane>

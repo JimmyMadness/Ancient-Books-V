@@ -45,15 +45,15 @@
             </HBox>
          </top>
          <left>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="534.0" prefWidth="263.0" spacing="40.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="229.0" fitWidth="191.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/warrior1.jpg" />
                      </image>
                   </ImageView>
-                  <Region prefHeight="113.0" prefWidth="191.0" />
-                  <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="109.0" text="Back" />
+                  <Region prefHeight="112.0" prefWidth="262.0" />
+                  <Button mnemonicParsing="false" onMouseReleased="#toGameView" prefHeight="35.0" prefWidth="109.0" text="Back" />
                </children>
             </VBox>
          </left>
@@ -85,7 +85,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="51.0" prefWidth="59.0" text="asd" GridPane.columnIndex="1" />
+                              <TextField editable="false" prefHeight="51.0" prefWidth="59.0" text="asd" GridPane.columnIndex="1" />
                               <Label text="Dexterity" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="18.0" />
@@ -111,16 +111,16 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                      </children>
                   </VBox>
-                  <Region prefHeight="500.0" prefWidth="28.0" />
+                  <Region prefHeight="534.0" prefWidth="89.0" />
                   <VBox prefHeight="500.0" prefWidth="188.0">
                      <children>
                         <Label text="Skils">
@@ -159,13 +159,13 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" text="asd" GridPane.columnIndex="1">
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" text="asd" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </TextField>
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label text="Secondary Skills">
@@ -199,9 +199,9 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="5.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField editable="false" prefHeight="5.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label text="Miscellaneous Skills">
@@ -247,11 +247,11 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
                      </children></VBox>
