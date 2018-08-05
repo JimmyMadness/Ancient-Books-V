@@ -49,6 +49,9 @@ public class Main extends Application implements ChangeViewListener{
 	private AnchorPane chPagePane;
 	private Scene chPageScene;
 	
+	private AnchorPane inventoryPane;
+	private Scene inventoryScene;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		viewController = new ViewController();
@@ -107,6 +110,11 @@ public class Main extends Application implements ChangeViewListener{
 			loader.setController(viewController);
 			chPagePane = (AnchorPane)loader.load();
 			chPageScene = new Scene(chPagePane);
+			
+			loader = new FXMLLoader(Main.class.getResource("resources/Inventory.fxml"));
+			loader.setController(viewController);
+			inventoryPane = (AnchorPane)loader.load();
+			inventoryScene = new Scene(inventoryPane);
 			
 			this.primaryStage = primaryStage;
 			this.primaryStage.initStyle(StageStyle.UNIFIED);
@@ -204,10 +212,18 @@ public class Main extends Application implements ChangeViewListener{
 		chPagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		
 	}
+	
+	private void showInventory() {
+		primaryStage.setScene(inventoryScene);
+		primaryStage.show();
+		inventoryPane.requestFocus();
+		inventoryPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		
+	}
 
 	@Override
 	public void onChangeView(ChangeViewEvent event) {
-		if(event.getView().equals(Views.NEWGAME)) {
+/*		if(event.getView().equals(Views.NEWGAME)) {
 			showNewGame();
 		}
 		if(event.getView().equals(Views.MAINMENU)) {
@@ -236,19 +252,34 @@ public class Main extends Application implements ChangeViewListener{
 		}
 		if(event.getView().equals(Views.CHARACTERPAGE)) {
 			showCharacterPage();
+		}*/
+		switch (event.getView()) {
+			case NEWGAME: showNewGame();
+			break;
+			case MAINMENU: showMainMenu();
+			break;
+			case BEGINNING: showBeginning();
+			break;
+			case CHCREATION: showChCreation();
+			break;
+			case CHANGECHPICTURE: showChangeChPicture();
+			break;
+			case CLOSECHANGECHPICTURE: closeChangeChPicture();
+			break;
+			case SKILLS: showSkills();
+			break;
+			case VILLAGE: showVillage();
+			break;
+			case DUNGEON: showDungeon();
+			break;
+			case CHARACTERPAGE: showCharacterPage();
+			break;
+			case INVENTORY: showInventory();
+			break;
+		
 		}
+		
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 
 

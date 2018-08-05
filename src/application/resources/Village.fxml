@@ -40,7 +40,7 @@
                            </image>
                         </ImageView>
                         <Button mnemonicParsing="false" onMouseReleased="#toCharacterPage" prefHeight="35.0" prefWidth="117.0" text="Character" />
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Inventory" />
+                        <Button mnemonicParsing="false" onMouseReleased="#toInventory" prefHeight="35.0" prefWidth="117.0" text="Inventory" />
                         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Menu" />
                      </children>
                   </VBox>

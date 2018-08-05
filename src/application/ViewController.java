@@ -182,15 +182,24 @@ private GameLocation gameLocation;
 		}
 	}
 	
+	@FXML
 	public void toDungeon(Event e) {
 		if (changeViewListener != null) {
 			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.DUNGEON));
 		}
 	}
 	
+	@FXML
 	public void toCharacterPage(Event e) {
 		if (changeViewListener != null) {
 			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CHARACTERPAGE));
+		}
+	}
+	
+	@FXML
+	public void toInventory(Event e) {
+		if (changeViewListener != null) {
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.INVENTORY));
 		}
 	}
 
