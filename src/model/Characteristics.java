@@ -75,6 +75,11 @@ public class Characteristics {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public double getMaxHp() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }

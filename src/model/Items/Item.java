@@ -1,4 +1,4 @@
-package model;
+package model.Items;
 
 public abstract class Item {
 	protected String name;
@@ -27,7 +27,7 @@ public abstract class Item {
 		return value;
 	}
 
-	public double getWeigth() {
+	public double getWeight() {
 		return weigth;
 	}
 

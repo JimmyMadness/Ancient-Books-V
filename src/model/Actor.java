@@ -16,10 +16,9 @@ public abstract class Actor {
 		
 
 		
-		public Actor(int str, int dex, int con, int intl, int cha, int lck,
-				double maxHP, String descritpion, String name, int lvl, ActorID id, Encyclopedia encyclopedia) {
+		public Actor(Characteristics characteristics, double maxHP, String descritpion, String name, int lvl, ActorID id, Encyclopedia encyclopedia) {
 			super();
-			this.characteristics.SetCharacteristics(str, dex, con, intl, cha, lck);
+			this.characteristics = characteristics;
 			this.maxHP = maxHP;
 			this.currentHP = maxHP;
 			this.descritpion = descritpion;
