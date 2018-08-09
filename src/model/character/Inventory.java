@@ -22,7 +22,13 @@ public class Inventory {
 	public Loadout getLoadout() {
 		return loadout;
 	}
+	
+	public void setLoadout(Loadout loadout) {
+		this.loadout = loadout;
+		
+	}
 
+	
 	public List<Item> getItems() {
 		return items;
 	}
@@ -42,9 +48,10 @@ public class Inventory {
 	//unequipping gets directly called on the loadout
 	
 	public void equip(EquippableItemHands e) {
-		HandsLoadout unequippedItems = loadout.equip(e);
-		//i unwrap what i got back, the method adds it to the inventory
-		HandsLoadout.unWrap(this, unequippedItems);
+		List<EquippableItemHands> unequippedItems = loadout.equip(e);
+		//i unwrap what i got back
+		for(EquippableItemHands u : unequippedItems)
+			items.add(u);
 	}
 	public void equip(Armor e) {
 		Optional<Armor> unequippedArmor = loadout.equip(e);
@@ -61,6 +68,7 @@ public class Inventory {
 		result += loadout.getTotalWeight();
 		return result;
 	}
+
 
 
 

@@ -4,8 +4,8 @@ import java.util.Optional;
 
 public abstract class EquippableItem extends Item {
 
-	public EquippableItem(String name, String description, int value, double weigth, ItemID id) {
-		super(name, description, value, weigth, id);
+	public EquippableItem(String name, String description, int value, double weigth, ItemID id, int level) {
+		super(name, description, value, weigth, id, level);
 		
 	}
 	

@@ -1,5 +1,7 @@
 package model;
 
+import model.Items.Weapon;
+
 public abstract class Actor {
 		protected Characteristics characteristics;
 
@@ -29,28 +31,8 @@ public abstract class Actor {
 		
 		
 		
-		public int getStr() {
-			return characteristics.getStr();
-		}
-
-		public int getDex() {
-			return characteristics.getDex();
-		}
-
-		public int getCon() {
-			return characteristics.getCon();
-		}
-
-		public int getIntl() {
-			return characteristics.getIntl();
-		}
-
-		public int getCha() {
-			return characteristics.getCha();
-		}
-
-		public int getLck() {
-			return characteristics.getLck();
+		public Characteristics getCharacteristics() {
+			return characteristics;
 		}
 
 		public double getMaxHP() {
@@ -59,6 +41,10 @@ public abstract class Actor {
 
 		public double getCurrentHP() {
 			return currentHP;
+		}
+		
+		public void setCurrentHP(double currentHP) {
+			this.currentHP = currentHP;
 		}
 
 		public String getDescritpion() {
@@ -77,7 +63,7 @@ public abstract class Actor {
 			return id;
 		}
 
-		public abstract void attack(Actor target);
-		public abstract void defend(Actor attacker);
+		public abstract Attack attack(Actor target);
+		public abstract Defense defend(Attack a);
 		
 }

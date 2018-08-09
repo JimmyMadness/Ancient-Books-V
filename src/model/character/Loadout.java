@@ -1,4 +1,6 @@
 package model.character;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import model.Items.*;
 
@@ -59,7 +61,7 @@ public class Loadout {
 
 	//if this returns true then the inventory needs to add the item e
 	public boolean remove(Armor e) {
-		if (e.getId() == ItemID.HELMET) {
+		if (e.getArmorPiece() == ArmorPiece.HELMET) {
 			if (this.getHelmet().isPresent()) {
 				//i use equals cause the item that has to be removed is the exact one that is equipped
 				//and the caller of this method is supposed to know exactly which istance is in the loadout
@@ -69,7 +71,7 @@ public class Loadout {
 				}
 			}
 		}
-		if (e.getId() == ItemID.CHESTARMOR) {
+		if (e.getArmorPiece() == ArmorPiece.CHEST) {
 			if (this.getChest().isPresent()) {
 				if (e.equals(getChest().get())){
 					this.chest = Optional.empty();
@@ -77,7 +79,7 @@ public class Loadout {
 				}
 			}
 		}
-		if (e.getId() == ItemID.GAUNTLETS) {
+		if (e.getArmorPiece() == ArmorPiece.GAUNTLETS) {
 			if (this.getGauntlets().isPresent()) {
 				if (e.equals(getGauntlets().get())){
 					this.gauntlets = Optional.empty();
@@ -85,7 +87,7 @@ public class Loadout {
 				}
 			}
 		}
-		if (e.getId() == ItemID.LEGSARMOR) {
+		if (e.getArmorPiece() == ArmorPiece.LEGS) {
 			if (this.getLegs().isPresent()) {
 				if (e.equals(getLegs().get())){
 					this.legs = Optional.empty();
@@ -93,7 +95,7 @@ public class Loadout {
 				}
 			}
 		}
-		if (e.getId() == ItemID.BOOTS) {
+		if (e.getArmorPiece() == ArmorPiece.BOOTS) {
 			if (this.getBoots().isPresent()) {
 				if (e.equals(getBoots().get())){
 					this.boots = Optional.empty();
@@ -105,7 +107,7 @@ public class Loadout {
 	}
 	
 	public boolean remove(EquippableItemHands e) {
-		if (e.getId() == ItemID.WEAPON) {
+		if (e instanceof Weapon) {
 			if (this.getRightHand().isPresent()) {
 				if (e.equals(getRightHand().get())){
 					this.rightHand = Optional.empty();
@@ -114,7 +116,7 @@ public class Loadout {
 				}
 			}
 		}
-		if (e.getId() == ItemID.WEAPON) {
+		if (e instanceof Weapon) {
 			if (this.getLeftHand().isPresent()) {
 				if (e.equals(getLeftHand().get())){
 					this.leftHand = Optional.empty();
@@ -133,23 +135,23 @@ public class Loadout {
 		
 		Optional<Armor> previousItem = Optional.empty();
 		
-		if (e.getId() == ItemID.HELMET) {
+		if (e.getArmorPiece() == ArmorPiece.HELMET) {
 			previousItem = getHelmet();
 			this.helmet = Optional.of(e);
 		}	
-		if (e.getId() == ItemID.CHESTARMOR) {
+		if (e.getArmorPiece() == ArmorPiece.CHEST) {
 			previousItem = getChest();
 			this.chest = Optional.of(e);
 		}
-		if (e.getId() == ItemID.GAUNTLETS) {
+		if (e.getArmorPiece() == ArmorPiece.GAUNTLETS) {
 			previousItem = getGauntlets();
 			this.gauntlets = Optional.of(e);
 		}
-		if (e.getId() == ItemID.LEGSARMOR) {
+		if (e.getArmorPiece() == ArmorPiece.LEGS) {
 			previousItem = getLegs();
 			this.legs = Optional.of(e);
 		}	
-		if (e.getId() == ItemID.BOOTS) {
+		if (e.getArmorPiece() == ArmorPiece.BOOTS) {
 			previousItem = getBoots();
 			this.boots = Optional.of(e);
 		}
@@ -163,12 +165,14 @@ public class Loadout {
 	//called HandLoadout capable of holding 0-2 items in it, it has a method that allows the inventory
 	//to add all the unequipped items, between 0-2. The inventory that calls the equip method has to save the return value
 	//and then unwrap it to get the items back in it.
-	public HandsLoadout equip(EquippableItemHands e){
-		HandsLoadout result = new HandsLoadout();
-		if (e.getHandsNumber() == WeaponHands.TWOHANDED) {
+	public List<EquippableItemHands> equip(EquippableItemHands e){
+		List<EquippableItemHands> result = new ArrayList<EquippableItemHands>();
+		if ((e.getHandsNumber() == WeaponHands.TWOHANDED)) {
 			this.twoHandedPresent = true;
-			result.add(rightHand);
-			result.add(leftHand);
+			if (rightHand.isPresent())
+				result.add(rightHand.get());
+			if (leftHand.isPresent())
+				result.add(leftHand.get());
 			rightHand = Optional.of(e);
 			leftHand = Optional.empty();
 		}
@@ -180,7 +184,7 @@ public class Loadout {
 				if(!leftHand.isPresent())
 					leftHand = Optional.of(e);
 				else {
-					result.add(rightHand);
+					result.add(rightHand.get());
 					rightHand = Optional.of(e);
 				}
 					
@@ -188,27 +192,15 @@ public class Loadout {
 		return result;
 		
 	}
-
-	public double getTotalPhysicalDamage() {
-		double result = 0;
-		if (rightHand.isPresent())
-			if (rightHand.get()instanceof HasDamage)
-				result += ((HasDamage)rightHand.get()).getPhysicalDamage();
-		if (leftHand.isPresent())
-			if (leftHand.get()instanceof HasDamage)
-				result += ((HasDamage)leftHand.get()).getPhysicalDamage();
-		return result;
-		
-	}
 	
-	public double getTotalMagicalDamage() {
-		double result = 0;
+	public List<Weapon> getWeapons() {
+		List<Weapon> result = new ArrayList<Weapon>();
 		if (rightHand.isPresent())
-			if (rightHand.get()instanceof HasDamage)
-				result += ((HasDamage)rightHand.get()).getMagicalDamage();
+			if (rightHand.get() instanceof Weapon)
+				result.add((Weapon)rightHand.get());
 		if (leftHand.isPresent())
-			if (leftHand.get()instanceof HasDamage)
-				result += ((HasDamage)leftHand.get()).getMagicalDamage();
+			if (leftHand.get() instanceof Weapon)
+				result.add((Weapon)leftHand.get());
 		return result;
 		
 	}

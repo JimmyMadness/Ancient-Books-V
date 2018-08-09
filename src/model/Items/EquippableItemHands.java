@@ -6,8 +6,8 @@ public class EquippableItemHands extends EquippableItem {
 
 	private WeaponHands handsNumber;
 	
-	public EquippableItemHands(String name, String description, int value, double weigth, ItemID id, WeaponHands handsNumber) {
-		super(name, description, value, weigth, id);
+	public EquippableItemHands(String name, String description, int value, double weigth, ItemID id, WeaponHands handsNumber, int level) {
+		super(name, description, value, weigth, id, level);
 		this.handsNumber = handsNumber;
 	}
 

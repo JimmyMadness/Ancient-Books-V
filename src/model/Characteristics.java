@@ -8,14 +8,13 @@ public class Characteristics {
 	private int cha;
 	private int lck;
 	
-	public Characteristics() {
-		super();
-		this.str = 0;
-		this.dex = 0;
-		this.con = 0;
-		this.intl = 0;
-		this.cha = 0;
-		this.lck = 0;
+	public Characteristics(int str, int dex, int con, int intl, int cha, int lck) {
+		this.str = str;
+		this.dex = dex;
+		this.con = con;
+		this.intl = intl;
+		this.cha = cha;
+		this.lck = lck;
 	}
 
 	public int getStr() {
@@ -66,19 +65,17 @@ public class Characteristics {
 		this.lck = lck;
 	}
 
-	public void SetCharacteristics(int str2, int dex2, int con2, int intl2, int cha2, int lck2) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	public double getCarryWeigth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 200 + str;
 	}
 
-	public double getMaxHp() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getMaxHp(int level) {
+		return 80+(con*0.5)+(level-1)*(con/20+2.5);
+	}
+	
+	public int getLevelUpSkillPoints() {
+		return 5 + intl/20;
 	}
 	
 	

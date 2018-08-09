@@ -9,8 +9,8 @@ public class Armor extends EquippableItem {
 	private ArmorPiece armorPiece;
 	private ArmorClass armorClass;
 	
-	public Armor(String name, String description, int value, double weigth, ItemID id, double physicalArmorRate, double magicalArmorRate, ArmorPiece armorPiece, ArmorClass armorClass) {
-		super(name, description, value, weigth, id);
+	public Armor(String name, String description, int value, double weigth, ItemID id,int level, double physicalArmorRate, double magicalArmorRate, ArmorPiece armorPiece, ArmorClass armorClass) {
+		super(name, description, value, weigth, id, level);
 		this.physicalArmorRate = physicalArmorRate;
 		this.magicalArmorRate = magicalArmorRate;
 		this.armorPiece = armorPiece;
@@ -28,6 +28,10 @@ public class Armor extends EquippableItem {
 
 	public ArmorPiece getArmorPiece() {
 		return armorPiece;
+	}
+	
+	public ArmorClass getArmorClass() {
+		return armorClass;
 	}
 
 	@Override
