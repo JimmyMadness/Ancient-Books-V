@@ -123,7 +123,11 @@ public class Character extends Actor implements CarryWeightListener {
 	}
 
 	
-
+	@Override
+	public boolean isDead() {
+		return currentHP <0;
+	}
+	
 	@Override
 	public Attack attack(Actor target) {
 		Enemy e = (Enemy)target;
@@ -184,9 +188,13 @@ public class Character extends Actor implements CarryWeightListener {
 	
 	@Override
 	public Defense defend(Attack a) {
-		// TODO Auto-generated method stub
-		return null;
+		double totalDamage = 0;
+		totalDamage += a.getPhysicalDamage() * (100/(100+ inventory.getLoadout().getTotalPhysicalArmorRate()));
+		totalDamage += a.getMagicalDamage() * (100/(100+ inventory.getLoadout().getTotalMagicalArmorRate()));
+		currentHP -= totalDamage;		
+		return new Defense(totalDamage, isDead());
 	}
+
 
 
 }

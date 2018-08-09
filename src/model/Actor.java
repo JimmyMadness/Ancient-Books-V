@@ -1,6 +1,5 @@
 package model;
 
-import model.Items.Weapon;
 
 public abstract class Actor {
 		protected Characteristics characteristics;
@@ -65,5 +64,6 @@ public abstract class Actor {
 
 		public abstract Attack attack(Actor target);
 		public abstract Defense defend(Attack a);
+		public abstract boolean isDead();
 		
 }

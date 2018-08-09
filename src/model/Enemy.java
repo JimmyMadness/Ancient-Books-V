@@ -3,6 +3,7 @@ package model;
 import java.util.Random;
 
 import model.Items.Armor;
+import model.Items.ItemID;
 import model.Items.Weapon;
 
 public class Enemy extends Actor {
@@ -66,14 +67,42 @@ public class Enemy extends Actor {
 		return xpReward;
 	}
 
+	@Override
 	public boolean isDead() {
 		return getCurrentHP()<0;
 	}
 
 	@Override
 	public Attack attack(Actor target) {
-		// TODO Auto-generated method stub
-		return null;
+		Character c = (Character)target;
+		double hitChance = 0;
+		if (weapon.getPhysicalDamage() > weapon.getMagicalDamage())
+//			hitChance = skill - (e.getArmor().getPhysicalArmorRate()/10) + ((characteristics.getDex()-e.getCharacteristics().getDex())/10) +
+//			(skills.getCriticalStrike()/10) -15;
+//		else
+//			hitChance = skill - (e.getArmor().getMagicalArmorRate()/10) + ((characteristics.getDex()-e.getCharacteristics().getDex())/10)+
+//			(skills.getCriticalStrike()/10) -15;
+		
+		if (hitChance > 95) 
+			hitChance = 95;
+		
+		Random r = new Random();
+		boolean hitSuccess = (r.nextDouble()*100) < hitChance;
+		if (!hitSuccess)
+			return new Attack(false, 0, 0 ,weapon.getFailText());
+		else{
+			double critChance = weapon.getCritChance() + characteristics.getLck()/4 + skills.getCriticalStrike()/4;
+			boolean critSuccess = (r.nextDouble()*100) < critChance;
+			double physicalDamage = (weapon.getPhysicalDamage() + weapon.getPhysicalDamage() * skill/100);
+			double magicalDamage = (weapon.getMagicalDamage() + weapon.getMagicalDamage() * skill/100);
+			if (critSuccess){
+				physicalDamage = physicalDamage * weapon.getCritMultiplier();
+				magicalDamage = magicalDamage * weapon.getCritMultiplier();
+			}
+			//inflicted damage is returned by the defender
+			return new Attack(true, physicalDamage, magicalDamage, weapon.getSuccessText());
+			
+		}
 	}
 
 	@Override
