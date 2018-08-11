@@ -2,7 +2,6 @@ package model;
 
 
 public abstract class Actor {
-		protected Characteristics characteristics;
 
 	
 		protected double maxHP;
@@ -17,9 +16,8 @@ public abstract class Actor {
 		
 
 		
-		public Actor(Characteristics characteristics, double maxHP, String descritpion, String name, int lvl, ActorID id, Encyclopedia encyclopedia) {
+		public Actor(double maxHP, String descritpion, String name, int lvl, ActorID id, Encyclopedia encyclopedia) {
 			super();
-			this.characteristics = characteristics;
 			this.maxHP = maxHP;
 			this.currentHP = maxHP;
 			this.descritpion = descritpion;
@@ -28,12 +26,6 @@ public abstract class Actor {
 			this.id = id;
 		}
 		
-		
-		
-		public Characteristics getCharacteristics() {
-			return characteristics;
-		}
-
 		public double getMaxHP() {
 			return maxHP;
 		}
@@ -62,8 +54,7 @@ public abstract class Actor {
 			return id;
 		}
 
-		public abstract Attack attack(Actor target);
-		public abstract Defense defend(Attack a);
+
 		public abstract boolean isDead();
 		
 }

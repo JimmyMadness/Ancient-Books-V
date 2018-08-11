@@ -4,6 +4,10 @@ import java.util.Optional;
 
 public class EquippableItemHands extends EquippableItem {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -275302738851348007L;
 	private WeaponHands handsNumber;
 	
 	public EquippableItemHands(String name, String description, int value, double weigth, ItemID id, WeaponHands handsNumber, int level) {

@@ -1,5 +1,6 @@
 package model.character;
 
+import java.io.Serializable;
 import java.util.*;
 
 import events.CarryWeightEvent;
@@ -7,8 +8,12 @@ import events.CarryWeightListener;
 import model.Items.*;
 
 
-public class Inventory {
+public class Inventory implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5072235167510528340L;
 	private Loadout loadout;
 	private List<Item> items;
 
@@ -38,11 +43,15 @@ public class Inventory {
 	public void setWeigthListener(CarryWeightListener weightListener) {
 		this.weightListener = weightListener;
 	}
-
+	
 	public void add(Item i) {
 		this.items.add(i);
-		weightListener.onCarryWeight(new CarryWeightEvent(this, getTotalWeight()));
-		
+		weightListener.onCarryWeight(new CarryWeightEvent(this, getTotalWeight()));	
+	}
+	
+	public void remove(Item i) {
+		this.items.remove(i);
+		weightListener.onCarryWeight(new CarryWeightEvent(this, getTotalWeight()));		
 	}
 	
 	//unequipping gets directly called on the loadout

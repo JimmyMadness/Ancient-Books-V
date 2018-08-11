@@ -1,10 +1,10 @@
 package model.character;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import events.CarryWeightEvent;
 import events.CarryWeightListener;
-import javafx.scene.image.Image;
 import model.Actor;
 import model.ActorID;
 import model.Attack;
@@ -12,13 +12,20 @@ import model.Characteristics;
 import model.Defense;
 import model.Encyclopedia;
 import model.Enemy;
+import model.Items.Item;
 import model.Items.ItemID;
 import model.Items.Weapon;
 
-public class Character extends Actor implements CarryWeightListener {
+public class Character extends Actor implements CarryWeightListener, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4528962735382593726L;
+	
+	private Characteristics characteristics;
 	private Sex sex;
 	private int age;
-	private Image characterPicture;
+	private String characterPicture;
 	private RpgClass rpgClass;
 	
 	private int xp;
@@ -27,11 +34,9 @@ public class Character extends Actor implements CarryWeightListener {
 	private Inventory inventory;
 	private Skills skills;
 	
-	private double carryWeight;
-	private double totalCarryWeight;
 
 	public static Character createNewCharacter(Characteristics characteristics, String descritpion,
-			String name, ActorID id, Encyclopedia encyclopedia,  Sex sex, int age, Image characterPicture,
+			String name, ActorID id, Encyclopedia encyclopedia,  Sex sex, int age, String characterPicture,
 			RpgClass rpgClass, SkillsType[] primarySkills, SkillsType[] secondarySkills) {
 		
 		int level = 1;
@@ -41,25 +46,24 @@ public class Character extends Actor implements CarryWeightListener {
 		Inventory inventory = encyclopedia.getStartingInventory(rpgClass);
 		inventory.setLoadout(encyclopedia.getStartingLoadout(rpgClass)) ;
 		Skills skills = encyclopedia.getStartingSkills(characteristics, primarySkills, secondarySkills);
-		double carryWeight = inventory.getTotalWeight();
-		double totalCarryWeight = characteristics.getCarryWeigth();
 		
 		return new Character(characteristics, maxHp, descritpion, name, level, id, encyclopedia,  sex, age, characterPicture, rpgClass,
-				xp, gold, inventory, skills, carryWeight ,totalCarryWeight);
+				xp, gold, inventory, skills);
 	
 	}
 	
 	public static Character loadCharacter(Characteristics characteristics, double maxHP, String descritpion,
-			String name, int lvl, ActorID id,Encyclopedia encyclopedia, Sex sex, int age, Image characterPicture,
+			String name, int lvl, ActorID id,Encyclopedia encyclopedia, Sex sex, int age, String characterPicture,
 			RpgClass rpgClass, int xp, int gold, Inventory inventory, Skills skills, double carryWeight, double totalCarryWeight) {
 		return new Character(characteristics,  maxHP, descritpion, name, lvl, id, encyclopedia,  sex,  age,  characterPicture,
-			 rpgClass,  xp,  gold,  inventory,  skills,  carryWeight,  totalCarryWeight);
+			 rpgClass,  xp,  gold,  inventory,  skills);
 	}
 	
 	private Character(Characteristics characteristics, double maxHP, String descritpion,
-			String name, int lvl, ActorID id,Encyclopedia encyclopedia, Sex sex, int age, Image characterPicture,
-			RpgClass rpgClass, int xp, int gold, Inventory inventory, Skills skills, double carryWeight, double totalCarryWeight) {
-		super(characteristics, maxHP, descritpion, name, lvl, id, encyclopedia);
+			String name, int lvl, ActorID id,Encyclopedia encyclopedia, Sex sex, int age, String characterPicture,
+			RpgClass rpgClass, int xp, int gold, Inventory inventory, Skills skills) {
+		super(maxHP, descritpion, name, lvl, id, encyclopedia);
+		this.characteristics = characteristics;
 		this.sex = sex;
 		this.age = age;
 		this.characterPicture = characterPicture;
@@ -68,10 +72,14 @@ public class Character extends Actor implements CarryWeightListener {
 		this.gold = gold;
 		this.inventory = inventory;
 		this.skills = skills;
-		this.carryWeight = carryWeight;
-		this.totalCarryWeight = totalCarryWeight;
+
 	}
 	
+
+
+	public Characteristics getCharacteristics() {
+		return characteristics;
+	}
 
 
 	public int getXp() {
@@ -98,7 +106,7 @@ public class Character extends Actor implements CarryWeightListener {
 		return age;
 	}
 
-	public Image getCharacterPicture() {
+	public String getCharacterPicture() {
 		return characterPicture;
 	}
 
@@ -114,12 +122,12 @@ public class Character extends Actor implements CarryWeightListener {
 		return skills;
 	}
 
-
+ 
 
 	@Override
 	public void onCarryWeight(CarryWeightEvent event) {
-		this.carryWeight = event.getCarryWeight();
-		
+	//	this.carryWeight = event.getCarryWeight();
+		//TODO change the listener to the controller, so that it can choose what to do
 	}
 
 	
@@ -128,15 +136,21 @@ public class Character extends Actor implements CarryWeightListener {
 		return currentHP <0;
 	}
 	
-	@Override
-	public Attack attack(Actor target) {
-		Enemy e = (Enemy)target;
+	public boolean canAddToInventory(Item i) {
+		return (inventory.getTotalWeight()+ i.getWeight())< characteristics.getCarryWeight();
+	}
+	
+	public boolean doILevelUp(){
+		return xp > encyclopedia.getXpToLevelUp().get(this.lvl);
+	}
+	
+	public Attack attack(Enemy target) {
 		double physicalDamage = 0;
 		double magicalDamage= 0;
 		boolean success = false;
 		String text = "";
 		for(Weapon w : inventory.getLoadout().getWeapons()) {
-			Attack a = weaponAttack(e, w);
+			Attack a = weaponAttack(target, w);
 			physicalDamage += a.getPhysicalDamage();
 			magicalDamage += a.getMagicalDamage();
 			success = success || a.isSucceded();
@@ -158,10 +172,10 @@ public class Character extends Actor implements CarryWeightListener {
 			skill = skills.getMagicPower();
 		
 		if (weapon.getPhysicalDamage() > weapon.getMagicalDamage())
-			hitChance = skill - (e.getArmor().getPhysicalArmorRate()/10) + ((characteristics.getDex()-e.getCharacteristics().getDex())/10) +
+			hitChance = skill - (e.getArmor().getPhysicalArmorRate()/10) + ((characteristics.getDex()-e.getAgility())/10) +
 			(skills.getCriticalStrike()/10) -15;
 		else
-			hitChance = skill - (e.getArmor().getMagicalArmorRate()/10) + ((characteristics.getDex()-e.getCharacteristics().getDex())/10)+
+			hitChance = skill - (e.getArmor().getMagicalArmorRate()/10) + ((characteristics.getDex()-e.getAgility())/10)+
 			(skills.getCriticalStrike()/10) -15;
 		
 		if (hitChance > 95) 
@@ -186,15 +200,32 @@ public class Character extends Actor implements CarryWeightListener {
 		}
 	}
 	
-	@Override
 	public Defense defend(Attack a) {
 		double totalDamage = 0;
-		totalDamage += a.getPhysicalDamage() * (100/(100+ inventory.getLoadout().getTotalPhysicalArmorRate()));
-		totalDamage += a.getMagicalDamage() * (100/(100+ inventory.getLoadout().getTotalMagicalArmorRate()));
+		totalDamage += a.getPhysicalDamage() * (100/(100+ getAdjustedPhysicalArmorRate()));
+		totalDamage += a.getMagicalDamage() * (100/(100+ getAdjustedMagicalArmorRate()));
 		currentHP -= totalDamage;		
 		return new Defense(totalDamage, isDead());
 	}
 
-
+	//from 50% to 150% based on skill
+	public double getAdjustedPhysicalArmorRate() {
+		double light = inventory.getLoadout().getTotalLightPhysicalArmorRate();
+		double heavy = inventory.getLoadout().getTotalHeavyPhysicalArmorRate();
+		
+		light = light + (skills.getLightArmor()-50)* light/100;
+		heavy = heavy + (skills.getHeavyArmor()-50) * heavy/100;
+		return light + heavy;
+	}
+	
+	//from 50% to 150% based on skill
+	public double getAdjustedMagicalArmorRate() {
+		double light = inventory.getLoadout().getTotalLightMagicalArmorRate();
+		double heavy = inventory.getLoadout().getTotalHeavyMagicalArmorRate();
+		
+		light = light + (skills.getLightArmor()-50)* light/100;
+		heavy = heavy + (skills.getHeavyArmor()-50) * heavy/100;
+		return light + heavy;
+	}
 
 }

@@ -4,6 +4,10 @@ import java.util.Optional;
 
 public class Armor extends EquippableItem {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5610378217068334433L;
 	private double physicalArmorRate;
 	private double magicalArmorRate;
 	private ArmorPiece armorPiece;

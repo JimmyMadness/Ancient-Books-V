@@ -1,6 +1,12 @@
 package model;
 
-public class Characteristics {
+import java.io.Serializable;
+
+public class Characteristics implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -874106504145408972L;
 	private int str;
 	private int dex;
 	private int con;
@@ -66,7 +72,7 @@ public class Characteristics {
 	}
 
 	
-	public double getCarryWeigth() {
+	public double getCarryWeight() {
 		return 200 + str;
 	}
 

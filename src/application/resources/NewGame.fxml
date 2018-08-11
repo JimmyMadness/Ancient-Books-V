@@ -19,8 +19,8 @@
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="390.0">
                      <children>
-                        <TextField20 promptText="New Game 1" />
-                        <Label text="DD/MM/YYYY hh:mm">
+                        <TextField20 fx:id="textNewGame1" onMouseClicked="#textNewGame1Clicked" promptText="New Game 1" />
+                        <Label fx:id="labelDateNewGame1" text="DD/MM/YYYY hh:mm">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -30,7 +30,7 @@
                         <Insets top="10.0" />
                      </padding>
                   </VBox>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                  <ImageView fx:id="imageNewGame1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/testcave2.jpg" />
                      </image></ImageView>
@@ -43,8 +43,8 @@
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="390.0">
                      <children>
-                        <TextField20 promptText="New Game 2" />
-                        <Label text="DD/MM/YYYY hh:mm">
+                        <TextField20 fx:id="textNewGame2" onMouseClicked="#textNewGame2Clicked" promptText="New Game 2" />
+                        <Label fx:id="labelDateNewGame2" text="DD/MM/YYYY hh:mm">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -53,7 +53,7 @@
                         <Insets top="10.0" />
                      </padding>
                   </VBox>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                  <ImageView fx:id="imageNewGame2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/testcave2.jpg" />
                      </image></ImageView>
@@ -66,8 +66,8 @@
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="390.0">
                      <children>
-                        <TextField20 promptText="New Game 3" />
-                        <Label text="DD/MM/YYYY hh:mm">
+                        <TextField20 fx:id="textNewGame3" onMouseClicked="#textNewGame3Clicked" promptText="New Game 3" />
+                        <Label fx:id="labelDateNewGame3" text="DD/MM/YYYY hh:mm">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -76,7 +76,7 @@
                         <Insets top="10.0" />
                      </padding>
                   </VBox>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                  <ImageView fx:id="imageNewGame3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/testcave2.jpg" />
                      </image></ImageView>
@@ -87,7 +87,7 @@
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
-                  <Button mnemonicParsing="false" onMouseReleased="#toBeginning" prefHeight="43.0" prefWidth="205.0" text="Ok" />
+                  <Button fx:id="buttonNewGameOk" mnemonicParsing="false" onMouseReleased="#toBeginning" prefHeight="43.0" prefWidth="205.0" text="Ok" />
                   <Button mnemonicParsing="false" onMouseReleased="#toMainMenu" prefHeight="43.0" prefWidth="205.0" text="Back" />                 
                </children>
             </HBox>

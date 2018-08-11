@@ -1,57 +1,68 @@
 package model.character;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Items.*;
 
-public class Loadout {
-	private Optional<Armor> helmet;
-	private Optional<Armor> chest;
-	private Optional<Armor> legs;
-	private Optional<Armor> gauntlets;
-	private Optional<Armor> boots;
+public class Loadout implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6412865762321678854L;
+	
+	///
+	///TODO: just found out the correct usage of optional, by design it is not recommended to store data
+	///i will have to refactor this whole class to be able to work with null objects (with a neutral behavior)
+	///instead of optionals
+	///
+	private Armor helmet;
+	private Armor chest;
+	private Armor legs;
+	private Armor gauntlets;
+	private Armor boots;
 	//if the equipped item is two-Handed we only equip it in one hand and keep the other free but locked
-	private Optional<EquippableItemHands> rightHand;
-	private Optional<EquippableItemHands> leftHand;
+	private EquippableItemHands rightHand;
+	private EquippableItemHands leftHand;
 	
 	private boolean twoHandedPresent = false;
 	
 	
 	public Loadout() {
-		this.helmet = Optional.empty();
-		this.chest = Optional.empty();
-		this.gauntlets = Optional.empty();
-		this.boots = Optional.empty();
-		this.rightHand = Optional.empty();
-		this.leftHand = Optional.empty();
+		this.helmet = null;
+		this.chest = null;
+		this.gauntlets = null;
+		this.boots = null;
+		this.rightHand = null;
+		this.leftHand = null;
 	}
 
 	public Optional<Armor> getHelmet() {
-		return helmet;
+		return Optional.ofNullable(helmet);
 	}
 
 	public Optional<Armor> getChest() {
-		return chest;
+		return Optional.ofNullable(chest);
 	}
 
 	public Optional<Armor> getLegs() {
-		return legs;
+		return Optional.ofNullable(legs);
 	}
 
 	public Optional<Armor> getGauntlets() {
-		return gauntlets;
+		return Optional.ofNullable(gauntlets);
 	}
 
 	public Optional<Armor> getBoots() {
-		return boots;
+		return Optional.ofNullable(boots);
 	}
 
 	public Optional<EquippableItemHands> getRightHand() {
-		return rightHand;
+		return Optional.ofNullable(rightHand);
 	}
 
 	public Optional<EquippableItemHands> getLeftHand() {
-		return leftHand;
+		return Optional.ofNullable(leftHand);
 	}
 
 	public boolean isTwoHandedPresent() {
@@ -66,7 +77,7 @@ public class Loadout {
 				//i use equals cause the item that has to be removed is the exact one that is equipped
 				//and the caller of this method is supposed to know exactly which istance is in the loadout
 				if (e.equals(getHelmet().get())){
-					this.helmet = Optional.empty();
+					this.helmet = null;
 					return true;
 				}
 			}
@@ -74,7 +85,7 @@ public class Loadout {
 		if (e.getArmorPiece() == ArmorPiece.CHEST) {
 			if (this.getChest().isPresent()) {
 				if (e.equals(getChest().get())){
-					this.chest = Optional.empty();
+					this.chest = null;
 					return true;
 				}
 			}
@@ -82,7 +93,7 @@ public class Loadout {
 		if (e.getArmorPiece() == ArmorPiece.GAUNTLETS) {
 			if (this.getGauntlets().isPresent()) {
 				if (e.equals(getGauntlets().get())){
-					this.gauntlets = Optional.empty();
+					this.gauntlets = null;
 					return true;
 				}
 			}
@@ -90,7 +101,7 @@ public class Loadout {
 		if (e.getArmorPiece() == ArmorPiece.LEGS) {
 			if (this.getLegs().isPresent()) {
 				if (e.equals(getLegs().get())){
-					this.legs = Optional.empty();
+					this.legs = null;
 					return true;
 				}
 			}
@@ -98,7 +109,7 @@ public class Loadout {
 		if (e.getArmorPiece() == ArmorPiece.BOOTS) {
 			if (this.getBoots().isPresent()) {
 				if (e.equals(getBoots().get())){
-					this.boots = Optional.empty();
+					this.boots = null;
 					return true;
 				}
 			}
@@ -110,7 +121,7 @@ public class Loadout {
 		if (e instanceof Weapon) {
 			if (this.getRightHand().isPresent()) {
 				if (e.equals(getRightHand().get())){
-					this.rightHand = Optional.empty();
+					this.rightHand = null;
 					twoHandedPresent = false;
 					return true;
 				}
@@ -119,7 +130,7 @@ public class Loadout {
 		if (e instanceof Weapon) {
 			if (this.getLeftHand().isPresent()) {
 				if (e.equals(getLeftHand().get())){
-					this.leftHand = Optional.empty();
+					this.leftHand = null;
 					twoHandedPresent = false;
 					return true;
 				}
@@ -137,23 +148,23 @@ public class Loadout {
 		
 		if (e.getArmorPiece() == ArmorPiece.HELMET) {
 			previousItem = getHelmet();
-			this.helmet = Optional.of(e);
+			this.helmet = e;
 		}	
 		if (e.getArmorPiece() == ArmorPiece.CHEST) {
 			previousItem = getChest();
-			this.chest = Optional.of(e);
+			this.chest = e;
 		}
 		if (e.getArmorPiece() == ArmorPiece.GAUNTLETS) {
 			previousItem = getGauntlets();
-			this.gauntlets = Optional.of(e);
+			this.gauntlets = e;
 		}
 		if (e.getArmorPiece() == ArmorPiece.LEGS) {
 			previousItem = getLegs();
-			this.legs = Optional.of(e);
+			this.legs = e;
 		}	
 		if (e.getArmorPiece() == ArmorPiece.BOOTS) {
 			previousItem = getBoots();
-			this.boots = Optional.of(e);
+			this.boots = e;
 		}
 			
 		return previousItem;
@@ -161,31 +172,29 @@ public class Loadout {
 	
 	//in case of equipping something in the hands slot things are different
 	//this because the character could be holding two separate one handed items
-	//and in that case we are supposed to return them both, for this reason we created a class
-	//called HandLoadout capable of holding 0-2 items in it, it has a method that allows the inventory
-	//to add all the unequipped items, between 0-2. The inventory that calls the equip method has to save the return value
-	//and then unwrap it to get the items back in it.
+	//and in that case we are supposed to return them both, for this reason we return a list
+	//and then unwrap it to get the items back.
 	public List<EquippableItemHands> equip(EquippableItemHands e){
 		List<EquippableItemHands> result = new ArrayList<EquippableItemHands>();
 		if ((e.getHandsNumber() == WeaponHands.TWOHANDED)) {
 			this.twoHandedPresent = true;
-			if (rightHand.isPresent())
-				result.add(rightHand.get());
-			if (leftHand.isPresent())
-				result.add(leftHand.get());
-			rightHand = Optional.of(e);
-			leftHand = Optional.empty();
+			if (getRightHand().isPresent())
+				result.add(rightHand);
+			if (getLeftHand().isPresent())
+				result.add(leftHand);
+			rightHand = e;
+			leftHand = null;
 		}
 		else {
 			twoHandedPresent = false;
-			if (!rightHand.isPresent())
-				rightHand = Optional.of(e);
+			if (!getRightHand().isPresent())
+				rightHand = e;
 			else
-				if(!leftHand.isPresent())
-					leftHand = Optional.of(e);
+				if(!getLeftHand().isPresent())
+					leftHand = e;
 				else {
-					result.add(rightHand.get());
-					rightHand = Optional.of(e);
+					result.add(rightHand);
+					rightHand = e;
 				}
 					
 		}
@@ -195,75 +204,146 @@ public class Loadout {
 	
 	public List<Weapon> getWeapons() {
 		List<Weapon> result = new ArrayList<Weapon>();
-		if (rightHand.isPresent())
-			if (rightHand.get() instanceof Weapon)
-				result.add((Weapon)rightHand.get());
-		if (leftHand.isPresent())
-			if (leftHand.get() instanceof Weapon)
-				result.add((Weapon)leftHand.get());
+		if (getRightHand().isPresent())
+			if (rightHand instanceof Weapon)
+				result.add((Weapon)rightHand);
+		if (getLeftHand().isPresent())
+			if (leftHand instanceof Weapon)
+				result.add((Weapon)leftHand);
 		return result;
 		
 	}
 	
 	
-	public double getTotalPhysicalArmorRate() {
+	public double getTotalLightPhysicalArmorRate() {
 		double result = 0;
-		if (helmet.isPresent())
-			result += helmet.get().getPhysicalArmorRate();
-		if (chest.isPresent())
-			result += chest.get().getPhysicalArmorRate();
-		if (gauntlets.isPresent())
-			result += gauntlets.get().getPhysicalArmorRate();
-		if (legs.isPresent())
-			result += legs.get().getPhysicalArmorRate();
-		if (boots.isPresent())
-			result += boots.get().getPhysicalArmorRate();
-		if (rightHand.isPresent())
-			if (rightHand.get()instanceof HasArmor)
-				result += ((HasArmor)rightHand.get()).getPhysicalArmorRate();
-		if (leftHand.isPresent())
-			if (leftHand.get()instanceof HasArmor)
-				result += ((HasArmor)leftHand.get()).getPhysicalArmorRate();
+		if (getHelmet().isPresent())
+			if (helmet.getArmorClass() == ArmorClass.LIGHT)
+				result += helmet.getPhysicalArmorRate();
+		if (getChest().isPresent())
+			if (chest.getArmorClass() == ArmorClass.LIGHT)
+				result += chest.getPhysicalArmorRate();
+		if (getGauntlets().isPresent())
+			if (gauntlets.getArmorClass() == ArmorClass.LIGHT)
+				result += gauntlets.getPhysicalArmorRate();
+		if (getLegs().isPresent())
+			if (legs.getArmorClass() == ArmorClass.LIGHT)
+				result += legs.getPhysicalArmorRate();
+		if (getBoots().isPresent())
+			if (boots.getArmorClass() == ArmorClass.LIGHT)
+				result += boots.getPhysicalArmorRate();
+		if (getRightHand().isPresent())
+			if (rightHand instanceof HasArmor)
+				if (((HasArmor) rightHand).getArmorClass() == ArmorClass.LIGHT)
+					result += ((HasArmor)rightHand).getPhysicalArmorRate();
+		if (getLeftHand().isPresent())
+			if (leftHand instanceof HasArmor)
+				if (((HasArmor)leftHand).getArmorClass() == ArmorClass.LIGHT)
+					result += ((HasArmor)leftHand).getPhysicalArmorRate();
 		return result;
 	}
 	
-	public double getTotalMagicalArmorRate() {
+	public double getTotalHeavyPhysicalArmorRate() {
 		double result = 0;
-		if (helmet.isPresent())
-			result += helmet.get().getMagicalArmorRate();
-		if (chest.isPresent())
-			result += chest.get().getMagicalArmorRate();
-		if (gauntlets.isPresent())
-			result += gauntlets.get().getMagicalArmorRate();
-		if (legs.isPresent())
-			result += legs.get().getMagicalArmorRate();
-		if (boots.isPresent())
-			result += boots.get().getMagicalArmorRate();
-		if (rightHand.isPresent())
-			if (rightHand.get()instanceof HasArmor)
-				result += ((HasArmor)rightHand.get()).getMagicalArmorRate();
-		if (leftHand.isPresent())
-			if (leftHand.get()instanceof HasArmor)
-				result += ((HasArmor)leftHand.get()).getMagicalArmorRate();
+		if (getHelmet().isPresent())
+			if (helmet.getArmorClass() == ArmorClass.HEAVY)
+				result += helmet.getPhysicalArmorRate();
+		if (getChest().isPresent())
+			if (chest.getArmorClass() == ArmorClass.HEAVY)
+				result += chest.getPhysicalArmorRate();
+		if (getGauntlets().isPresent())
+			if (gauntlets.getArmorClass() == ArmorClass.HEAVY)
+				result += gauntlets.getPhysicalArmorRate();
+		if (getLegs().isPresent())
+			if (legs.getArmorClass() == ArmorClass.HEAVY)
+				result += legs.getPhysicalArmorRate();
+		if (getBoots().isPresent())
+			if (boots.getArmorClass() == ArmorClass.HEAVY)
+				result += boots.getPhysicalArmorRate();
+		if (getRightHand().isPresent())
+			if (rightHand instanceof HasArmor)
+				if (((HasArmor) rightHand).getArmorClass() == ArmorClass.HEAVY)
+					result += ((HasArmor)rightHand).getPhysicalArmorRate();
+		if (getLeftHand().isPresent())
+			if (leftHand instanceof HasArmor)
+				if (((HasArmor)leftHand).getArmorClass() == ArmorClass.HEAVY)
+					result += ((HasArmor)leftHand).getPhysicalArmorRate();
+		return result;
+	}
+	
+	
+	public double getTotalLightMagicalArmorRate() {
+		double result = 0;
+		if (getHelmet().isPresent())
+			if (helmet.getArmorClass() == ArmorClass.LIGHT)
+				result += helmet.getMagicalArmorRate();
+		if (getChest().isPresent())
+			if (chest.getArmorClass() == ArmorClass.LIGHT)
+				result += chest.getMagicalArmorRate();
+		if (getGauntlets().isPresent())
+			if (gauntlets.getArmorClass() == ArmorClass.LIGHT)
+				result += gauntlets.getMagicalArmorRate();
+		if (getLegs().isPresent())
+			if (legs.getArmorClass() == ArmorClass.LIGHT)
+				result += legs.getMagicalArmorRate();
+		if (getBoots().isPresent())
+			if (boots.getArmorClass() == ArmorClass.LIGHT)
+				result += boots.getMagicalArmorRate();
+		if (getRightHand().isPresent())
+			if (rightHand instanceof HasArmor)
+				if (((HasArmor) rightHand).getArmorClass() == ArmorClass.LIGHT)
+					result += ((HasArmor)rightHand).getMagicalArmorRate();
+		if (getLeftHand().isPresent())
+			if (leftHand instanceof HasArmor)
+				if (((HasArmor)leftHand).getArmorClass() == ArmorClass.LIGHT)
+					result += ((HasArmor)leftHand).getMagicalArmorRate();
+		return result;
+	}
+	
+	public double getTotalHeavyMagicalArmorRate() {
+		double result = 0;
+		if (getHelmet().isPresent())
+			if (helmet.getArmorClass() == ArmorClass.HEAVY)
+				result += helmet.getMagicalArmorRate();
+		if (getChest().isPresent())
+			if (chest.getArmorClass() == ArmorClass.HEAVY)
+				result += chest.getMagicalArmorRate();
+		if (getGauntlets().isPresent())
+			if (gauntlets.getArmorClass() == ArmorClass.HEAVY)
+				result += gauntlets.getMagicalArmorRate();
+		if (getLegs().isPresent())
+			if (legs.getArmorClass() == ArmorClass.HEAVY)
+				result += legs.getMagicalArmorRate();
+		if (getBoots().isPresent())
+			if (boots.getArmorClass() == ArmorClass.HEAVY)
+				result += boots.getMagicalArmorRate();
+		if (getRightHand().isPresent())
+			if (rightHand instanceof HasArmor)
+				if (((HasArmor) rightHand).getArmorClass() == ArmorClass.HEAVY)
+					result += ((HasArmor)rightHand).getMagicalArmorRate();
+		if (getLeftHand().isPresent())
+			if (leftHand instanceof HasArmor)
+				if (((HasArmor)leftHand).getArmorClass() == ArmorClass.HEAVY)
+					result += ((HasArmor)leftHand).getMagicalArmorRate();
 		return result;
 	}
 	
 	public double getTotalWeight() {
 		int result = 0;
-		if (helmet.isPresent())
-			result += helmet.get().getWeight();
-		if (chest.isPresent())
-			result += chest.get().getWeight();
-		if (gauntlets.isPresent())
-			result += gauntlets.get().getWeight();
-		if (legs.isPresent())
-			result += legs.get().getWeight();
-		if (boots.isPresent())
-			result += boots.get().getWeight();
-		if (rightHand.isPresent())
-			result += rightHand.get().getWeight();
-		if (leftHand.isPresent())
-			result += leftHand.get().getWeight();
+		if (getHelmet().isPresent())
+			result += helmet.getWeight();
+		if (getChest().isPresent())
+			result += chest.getWeight();
+		if (getGauntlets().isPresent())
+			result += gauntlets.getWeight();
+		if (getLegs().isPresent())
+			result += legs.getWeight();
+		if (getBoots().isPresent())
+			result += boots.getWeight();
+		if (getRightHand().isPresent())
+			result += rightHand.getWeight();
+		if (getLeftHand().isPresent())
+			result += leftHand.getWeight();
 		return result;
 	}
 

@@ -5,10 +5,15 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Weapon extends EquippableItemHands implements HasDamage{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5248000014319821995L;
 	private double maxPhysicalDamage;
 	private double minPhysicalDamage;
 	private double maxMagicalDamage;
 	private double minMagicalDamage;
+	//critChance between 0 and 100
 	private double critChance;
 	private double critMultiplier;
 	private List<String> successText;

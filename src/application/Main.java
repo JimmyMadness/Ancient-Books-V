@@ -2,6 +2,7 @@ package application;
 	
 import java.io.FileNotFoundException;
 
+import controller.GameController;
 import events.ChangeViewEvent;
 import events.ChangeViewListener;
 import javafx.application.Application;
@@ -10,6 +11,7 @@ import javafx.fxml.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Location;
 import javafx.scene.Scene;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.*;
@@ -19,6 +21,7 @@ import javafx.scene.layout.*;
 public class Main extends Application implements ChangeViewListener{
 
 	private ViewController viewController;
+	private GameController gameController;
 	private Stage primaryStage;
 	
 	private AnchorPane mainPane;
@@ -54,7 +57,8 @@ public class Main extends Application implements ChangeViewListener{
 	
 	@Override
 	public void start(Stage primaryStage) {
-		viewController = new ViewController();
+		gameController = new GameController();
+		viewController = new ViewController(gameController);
 		viewController.setChangeViewListener(this);
 		
 		try {
@@ -147,6 +151,11 @@ public class Main extends Application implements ChangeViewListener{
 		primaryStage.show();
 		newGamePane.requestFocus();
 		newGamePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		try {
+			viewController.initNewGame();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void showBeginning() {
@@ -194,7 +203,7 @@ public class Main extends Application implements ChangeViewListener{
 		primaryStage.show();
 		villagePane.requestFocus();
 		villagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
-		viewController.setGameLocation(GameLocation.VILLAGE);
+		viewController.setGameLocation(Location.VILLAGE);
 	}	
 	
 	private void showDungeon() {
@@ -202,7 +211,7 @@ public class Main extends Application implements ChangeViewListener{
 		primaryStage.show();
 		dungeonPane.requestFocus();
 		dungeonPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);	
-		viewController.setGameLocation(GameLocation.DUNGEON);
+		viewController.setGameLocation(Location.DUNGEON);
 	}
 	
 	private void showCharacterPage() {
@@ -223,36 +232,7 @@ public class Main extends Application implements ChangeViewListener{
 
 	@Override
 	public void onChangeView(ChangeViewEvent event) {
-/*		if(event.getView().equals(Views.NEWGAME)) {
-			showNewGame();
-		}
-		if(event.getView().equals(Views.MAINMENU)) {
-			showMainMenu();
-		}
-		if(event.getView().equals(Views.BEGINNING)) {
-			showBeginning();
-		}
-		if(event.getView().equals(Views.CHCREATION)) {
-			showChCreation();
-		}
-		if(event.getView().equals(Views.CHANGECHPICTURE)) {
-			showChangeChPicture();
-		}
-		if(event.getView().equals(Views.CLOSECHANGECHPICTURE)) {
-			closeChangeChPicture();
-		}
-		if(event.getView().equals(Views.SKILLS)) {
-			showSkills();
-		}
-		if(event.getView().equals(Views.VILLAGE)) {
-			showVillage();
-		}
-		if(event.getView().equals(Views.DUNGEON)) {
-			showDungeon();
-		}
-		if(event.getView().equals(Views.CHARACTERPAGE)) {
-			showCharacterPage();
-		}*/
+
 		switch (event.getView()) {
 			case NEWGAME: showNewGame();
 			break;

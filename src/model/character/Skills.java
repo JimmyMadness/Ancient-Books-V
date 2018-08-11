@@ -1,6 +1,12 @@
 package model.character;
 
-public class Skills {
+import java.io.Serializable;
+
+public class Skills implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6610947169817052636L;
 	private SkillsType primarySKills[];
 	private SkillsType secondarySkills[];
 	private int oneHanded;

@@ -1,18 +1,24 @@
 package model.Items;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5258295990252560900L;
 	protected String name;
 	protected String description;
 	protected int value;
-	protected double weigth;
+	protected double weight;
 	protected ItemID id;
 	protected int level;
 	
-	public Item(String name, String description, int value, double weigth, ItemID id, int level) {
+	public Item(String name, String description, int value, double weight, ItemID id, int level) {
 		this.name = name;
 		this.description = description;
 		this.value = value;
-		this.weigth = weigth;
+		this.weight = weight;
 		this.id = id;
 		this.level = level;
 	}
@@ -30,11 +36,15 @@ public abstract class Item {
 	}
 
 	public double getWeight() {
-		return weigth;
+		return weight;
 	}
 
 	public ItemID getId() {
 		return id;
+	}
+
+	public int getLevel() {
+		return level;
 	}
 	
 	
