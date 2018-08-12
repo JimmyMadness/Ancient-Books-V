@@ -254,6 +254,48 @@
 }
 
 
+.combo-box .context-menu {
+	-fx-background-color: #222222;
+	-fx-font-size: 15px;
+}
+
+.combo-box .menu-item:focused {
+	-fx-background-color: darkgray;
+	-fx-font-size: 15px;
+}
+
+.combo-box .menu-item > .label {
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+.combo-box .menu-item:focused > .label { 
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+.combo-box {
+  -fx-background-color: #222222;
+  -fx-mark-color: white; 
+  -fx-font-size: 15px;
+}
+
+.combo-box:hover{
+	-fx-mark-color: yellow;
+	-fx-font-size: 15px;
+}
+
+.combo-box .list-cell{
+	-fx-font-family: Minecraft;
+	-fx-text-fill: white;
+}
+
+.combo-box > .label {
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+
 .text-area {
 	-fx-highlight-fill: black;
   -fx-highlight-text-fill: white;

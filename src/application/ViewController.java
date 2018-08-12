@@ -4,25 +4,34 @@ package application;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
+
 import exceptions.LoadException;
 import controller.GameController;
 import events.ChangeViewEvent;
 import events.ChangeViewListener;
+import events.SkillsComboListener;
 import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.control.Button;
+
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import model.Location;
 import model.Save;
+import model.character.SkillsType;
 import textfield.TextField20;
 
 public class ViewController {
@@ -36,7 +45,11 @@ public class ViewController {
 		this.gameController = gameController;
 	}
 	
+
+	
 	//MAIN MENU
+	
+	
 	
 	@FXML
 	public void NewGameClick(Event e) {
@@ -190,6 +203,15 @@ public class ViewController {
 		buttonNewGameOk.setDisable(false);
 	}
 
+	
+	//from new game screen and load screen (possibly also options screen)
+	@FXML
+	public void toMainMenu(Event e) {
+		if (changeViewListener !=null) {
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.MAINMENU));
+		}
+	}
+	
 	//from new game screen
 	@FXML
 	public void toBeginning(Event e) {
@@ -208,17 +230,135 @@ public class ViewController {
 		}
 	}
 	
+	//CHARACTER CREATION
 	
+	private boolean newChCreation;
+	//this one is to initialize the second page
+	private boolean newChCreation2;
+	
+	@FXML
+	private TextField textChCreationAvaiable;
+	@FXML
+	private TextField textChCreationStr;
+	@FXML
+	private TextField textChCreationDex;
+	@FXML
+	private TextField textChCreationCon;
+	@FXML
+	private TextField textChCreationInt;
+	@FXML
+	private TextField textChCreationCha;
+	@FXML
+	private TextField textChCreationLck;
+	@FXML
+	private ImageView imageChCreation;
 	
 	@FXML
 	private ListView<String> classList;
 	public void initChCreation() {
-		classList.getItems().add("Warrior");
-		classList.getItems().add("Mage");
-		classList.getItems().add("Rogue");
-		classList.getSelectionModel().select(0);
-		
+		if (newChCreation) {
+			newChCreation = false;
+			classList.getItems().add("Warrior");
+			classList.getItems().add("Mage");
+			classList.getItems().add("Rogue");
+			classList.getSelectionModel().select(0);
+			//we add a listener for the change in selected class, so that we can change the character picture
+			classList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+					try {
+						if (newValue.toString().equals("Warrior"))
+							imageChCreation.setImage(new Image(new FileInputStream("src/application/resources/images/warrior1.jpg")));
+						if (newValue.toString().equals("Mage"))
+							imageChCreation.setImage(new Image(new FileInputStream("src/application/resources/images/mage1.jpg")));
+						if (newValue.toString().equals("Rogue"))
+							imageChCreation.setImage(new Image(new FileInputStream("src/application/resources/images/rogue1.jpg")));
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+			});
+			textChCreationStr.setText("50");
+			textChCreationDex.setText("50");
+			textChCreationCon.setText("50");
+			textChCreationInt.setText("50");
+			textChCreationCha.setText("50");
+			textChCreationLck.setText("50");
+			textChCreationAvaiable.setText("30");
+		}
 	}
+	
+	//CHARACTER CREATION: SET CHARACTERISTICS
+	
+	private void increaseCharacteristic(TextField textAvaiable, TextField textCharacteristic) {
+		int avaiable = Integer.parseInt(textAvaiable.getText());
+		int characteristic = Integer.parseInt(textCharacteristic.getText());
+		if (avaiable >0) 
+			if (characteristic <100) {
+				characteristic++;
+				avaiable--;
+			}
+		textCharacteristic.setText(String.valueOf(characteristic));
+		textAvaiable.setText(String.valueOf(avaiable));
+	}
+	
+	private void decreaseCharacteristic(TextField textAvaiable, TextField textCharacteristic, int lowerLimit) {
+		int avaiable = Integer.parseInt(textAvaiable.getText());
+		int characteristic = Integer.parseInt(textCharacteristic.getText());
+		if (characteristic >lowerLimit) {
+			characteristic--;
+			avaiable++;
+		}
+		textCharacteristic.setText(String.valueOf(characteristic));
+		textAvaiable.setText(String.valueOf(avaiable));
+	}
+	
+	public void buttonChCreationUpStrClicked(Event e) {
+		increaseCharacteristic(textChCreationAvaiable, textChCreationStr);
+	}
+	
+	public void buttonChCreationDownStrClicked(Event e) {
+		decreaseCharacteristic(textChCreationAvaiable, textChCreationStr, 1);
+	}
+	
+	public void buttonChCreationUpDexClicked(Event e) {
+		increaseCharacteristic(textChCreationAvaiable, textChCreationDex);
+	}
+	
+	public void buttonChCreationDownDexClicked(Event e) {
+		decreaseCharacteristic(textChCreationAvaiable, textChCreationDex, 1);
+	}
+	
+	public void buttonChCreationUpConClicked(Event e) {
+		increaseCharacteristic(textChCreationAvaiable, textChCreationCon);
+	}
+	
+	public void buttonChCreationDownConClicked(Event e) {
+		decreaseCharacteristic(textChCreationAvaiable, textChCreationCon, 1);
+	}
+	
+	public void buttonChCreationUpIntClicked(Event e) {
+		increaseCharacteristic(textChCreationAvaiable, textChCreationInt);
+	}
+	
+	public void buttonChCreationDownIntClicked(Event e) {
+		decreaseCharacteristic(textChCreationAvaiable, textChCreationInt, 1);
+	}
+	
+	public void buttonChCreationUpChaClicked(Event e) {
+		increaseCharacteristic(textChCreationAvaiable, textChCreationCha);
+	}
+	
+	public void buttonChCreationDownChaClicked(Event e) {
+		decreaseCharacteristic(textChCreationAvaiable, textChCreationCha, 1);
+	}
+	
+	public void buttonChCreationUpLckClicked(Event e) {
+		increaseCharacteristic(textChCreationAvaiable, textChCreationLck);
+	}
+	
+	public void buttonChCreationDownLckClicked(Event e) {
+		decreaseCharacteristic(textChCreationAvaiable, textChCreationLck, 1);
+	}
+	
+	//CHARACTER CREATION SET PICTURE
 	
 	@FXML 
 	private ImageView chPicture1;
@@ -236,20 +376,29 @@ public class ViewController {
 			chPicture3.setImage(new Image(new FileInputStream("src/application/resources/images/warrior3.jpg")));
 			chPicture4.setImage(new Image(new FileInputStream("src/application/resources/images/warrior4.jpg")));
 		}
-/*		if (classList.getSelectionModel().getSelectedItem().equals("Mage")) {
-			chPicture1.setImage(new Image("mage1.jpg"));
-			chPicture2.setImage(new Image("mage2.jpg"));
-			chPicture3.setImage(new Image("mage3.jpg"));
-			chPicture4.setImage(new Image("mage4.jpg"));
+		if (classList.getSelectionModel().getSelectedItem().equals("Mage")) {
+			chPicture1.setImage(new Image(new FileInputStream("src/application/resources/images/mage1.jpg")));
+			chPicture2.setImage(new Image(new FileInputStream("src/application/resources/images/mage2.jpg")));
+			chPicture3.setImage(new Image(new FileInputStream("src/application/resources/images/mage3.jpg")));
+			chPicture4.setImage(new Image(new FileInputStream("src/application/resources/images/mage4.jpg")));
 		}
-		if (classList.getSelectionModel().getSelectedItem().equals("Warrior")) {
-			chPicture1.setImage(new Image("rogue1.jpg"));
-			chPicture2.setImage(new Image("rogue2.jpg"));
-			chPicture3.setImage(new Image("rogue3.jpg"));
-			chPicture4.setImage(new Image("rogue4.jpg"));
-		}*/
+		if (classList.getSelectionModel().getSelectedItem().equals("Rogue")) {
+			chPicture1.setImage(new Image(new FileInputStream("src/application/resources/images/Rogue1.jpg")));
+			chPicture2.setImage(new Image(new FileInputStream("src/application/resources/images/Rogue2.jpg")));
+			chPicture3.setImage(new Image(new FileInputStream("src/application/resources/images/Rogue3.jpg")));
+			chPicture4.setImage(new Image(new FileInputStream("src/application/resources/images/Rogue4.jpg")));
+		}
 	}
 
+	@FXML
+	public void toChangeChPicture(Event e) {
+		if (changeViewListener != null) {
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CHANGECHPICTURE));
+		}
+	}
+	
+
+	
 	@FXML
 	private Pane chPicturePane1;
 	@FXML
@@ -260,72 +409,68 @@ public class ViewController {
 	private Pane chPicturePane4;
 	
 	@FXML
+	private Image selectedChPicture;
+	
+	@FXML
 	public void selectChPicture(Event e) {
 		if(e.getSource().equals(chPicture1)) {
 			chPicturePane1.setStyle("-fx-border-color: yellow;");
 			chPicturePane2.setStyle("-fx-border-color: white;");
 			chPicturePane3.setStyle("-fx-border-color: white;");
 			chPicturePane4.setStyle("-fx-border-color: white;");
+			selectedChPicture = chPicture1.getImage();
 		}
 		if(e.getSource().equals(chPicture2)) {
 			chPicturePane1.setStyle("-fx-border-color: white;");
 			chPicturePane2.setStyle("-fx-border-color: yellow;");
 			chPicturePane3.setStyle("-fx-border-color: white;");
 			chPicturePane4.setStyle("-fx-border-color: white;");
+			selectedChPicture = chPicture2.getImage();
 		}
 		if(e.getSource().equals(chPicture3)) {
 			chPicturePane1.setStyle("-fx-border-color: white;");
 			chPicturePane2.setStyle("-fx-border-color: white;");
 			chPicturePane3.setStyle("-fx-border-color: yellow;");
 			chPicturePane4.setStyle("-fx-border-color: white;");
+			selectedChPicture = chPicture3.getImage();
 		}
 		if(e.getSource().equals(chPicture4)) {
 			chPicturePane1.setStyle("-fx-border-color: white;");
 			chPicturePane2.setStyle("-fx-border-color: white;");
 			chPicturePane3.setStyle("-fx-border-color: white;");
 			chPicturePane4.setStyle("-fx-border-color: yellow;");
+			selectedChPicture = chPicture4.getImage();
 		}
 			
 	}
 	
-	public Location getGameLocation() {
-		return gameLocation;
-	}
-
-	public void setGameLocation(Location gameLocation) {
-		this.gameLocation = gameLocation;
-	}
-
 	@FXML
 	public void closeChPicture(Event e) {
 		if (changeViewListener !=null) {
 			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CLOSECHANGECHPICTURE));
 		}
 	}
-
 	
-
-	
-
-	
-
 	@FXML
-	public void toMainMenu(Event e) {
+	public void closeChPictureSelected(Event e) {
 		if (changeViewListener !=null) {
-			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.MAINMENU));
+			imageChCreation.setImage(selectedChPicture);
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CLOSECHANGECHPICTURE));
 		}
 	}
 	
-	
-
-	
+	//goes to character creation page2
 	@FXML
-	public void toChangeChPicture(Event e) {
+	public void toSkills(Event e) {
 		if (changeViewListener != null) {
-			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CHANGECHPICTURE));
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.SKILLS));
 		}
 	}
 	
+	
+	//CHARACTER CREATION PAGE 2
+	
+	//returns to the first page
 	@FXML
 	public void toChCreation(Event e) {
 		if (changeViewListener != null) {
@@ -333,11 +478,92 @@ public class ViewController {
 		}
 	}
 	
+	
+	private ObservableList<SkillsType> allSkills;
+	
 	@FXML
-	public void toSkills(Event e) {
-		if (changeViewListener != null) {
-			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.SKILLS));
+	private ComboBox<SkillsType> comboSkillsPrimary1;
+	@FXML
+	private ComboBox<SkillsType> comboSkillsPrimary2;
+	@FXML
+	private ComboBox<SkillsType> comboSkillsPrimary3;
+	@FXML
+	private ComboBox<SkillsType> comboSkillsSecondary1;
+	@FXML
+	private ComboBox<SkillsType> comboSkillsSecondary2;
+	@FXML
+	private ComboBox<SkillsType> comboSkillsSecondary3;
+		
+	private ObservableList<SkillsType> skillsForPrimary1;	
+	private ObservableList<SkillsType> skillsForPrimary2;	
+	private ObservableList<SkillsType> skillsForPrimary3;	
+	private ObservableList<SkillsType> skillsForSecondary1;	
+	private ObservableList<SkillsType> skillsForSecondary2;	
+	private ObservableList<SkillsType> skillsForSecondary3;	
+	
+	private SkillsComboListener listenerForSkillChanges;
+	
+	public void initChCreation2() {
+		if (newChCreation2) {
+			newChCreation2 = false;
+			allSkills = FXCollections.observableArrayList();
+			for(SkillsType type : SkillsType.values()) {
+				allSkills.add(type);
+			}
+			
+			skillsForPrimary1 = FXCollections.observableArrayList();
+			skillsForPrimary2 = FXCollections.observableArrayList();
+			skillsForPrimary3 = FXCollections.observableArrayList();
+			skillsForSecondary1 = FXCollections.observableArrayList();
+			skillsForSecondary2 = FXCollections.observableArrayList();
+			skillsForSecondary3 = FXCollections.observableArrayList();
+
+			skillsForPrimary1.addAll(allSkills);
+			skillsForPrimary2.addAll(allSkills);
+			skillsForPrimary3.addAll(allSkills);
+			skillsForSecondary1.addAll(allSkills);
+			skillsForSecondary2.addAll(allSkills);
+			skillsForSecondary3.addAll(allSkills);
+					
+			comboSkillsPrimary1.setItems(skillsForPrimary1);
+			comboSkillsPrimary2.setItems(skillsForPrimary2);
+			comboSkillsPrimary3.setItems(skillsForPrimary3);
+			comboSkillsSecondary1.setItems(skillsForSecondary1);
+			comboSkillsSecondary2.setItems(skillsForSecondary2);
+			comboSkillsSecondary3.setItems(skillsForSecondary3);
+			
+			comboSkillsPrimary1.getSelectionModel().select(SkillsType.NONE);
+			comboSkillsPrimary2.getSelectionModel().select(SkillsType.NONE);
+			comboSkillsPrimary3.getSelectionModel().select(SkillsType.NONE);
+			comboSkillsSecondary1.getSelectionModel().select(SkillsType.NONE);
+			comboSkillsSecondary2.getSelectionModel().select(SkillsType.NONE);
+			comboSkillsSecondary3.getSelectionModel().select(SkillsType.NONE);
+			
+			listenerForSkillChanges = new SkillsComboListener(comboSkillsPrimary1, comboSkillsPrimary2, comboSkillsPrimary3,
+						comboSkillsSecondary1, comboSkillsSecondary2, comboSkillsSecondary3,
+						skillsForPrimary1, skillsForPrimary2, skillsForPrimary3, skillsForSecondary1, skillsForSecondary2, skillsForSecondary3);
+			
+			
+			comboSkillsPrimary1.getSelectionModel().selectedItemProperty().addListener(listenerForSkillChanges);
+			comboSkillsPrimary2.getSelectionModel().selectedItemProperty().addListener(listenerForSkillChanges);
+			comboSkillsPrimary3.getSelectionModel().selectedItemProperty().addListener(listenerForSkillChanges);
+			comboSkillsSecondary1.getSelectionModel().selectedItemProperty().addListener(listenerForSkillChanges);
+			comboSkillsSecondary2.getSelectionModel().selectedItemProperty().addListener(listenerForSkillChanges);
+			comboSkillsSecondary3.getSelectionModel().selectedItemProperty().addListener(listenerForSkillChanges);	
+			
 		}
+	}
+	
+	
+	
+
+	
+	public Location getGameLocation() {
+		return gameLocation;
+	}
+
+	public void setGameLocation(Location gameLocation) {
+		this.gameLocation = gameLocation;
 	}
 	
 	@FXML
@@ -382,6 +608,8 @@ public class ViewController {
 		this.changeViewListener = listener;
 	}
 
+	
+	//BEGINNING ANIMATION
 	@FXML
 	private Label labelBeginning1;
 	@FXML
@@ -447,6 +675,9 @@ public class ViewController {
             @Override
             public void handle(ActionEvent actionEvent) {
         		if (changeViewListener != null) {
+        			//if i come to the character creation page from the beginning sequence then i reset it's contents
+        			newChCreation = true;
+        			newChCreation2 = true;
         			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CHCREATION));
         		}
             }

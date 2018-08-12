@@ -95,7 +95,7 @@ public class Main extends Application implements ChangeViewListener{
 			changeChPictureStage.initModality(Modality.APPLICATION_MODAL);
 			changeChPictureStage.setScene(changeChPictureScene);
 			
-			loader = new FXMLLoader(Main.class.getResource("resources/CharacterSkills.fxml"));
+			loader = new FXMLLoader(Main.class.getResource("resources/CharacterCreation2.fxml"));
 			loader.setController(viewController);
 			skillsPane = (AnchorPane)loader.load();
 			skillsScene = new Scene(skillsPane);
@@ -196,6 +196,7 @@ public class Main extends Application implements ChangeViewListener{
 		primaryStage.show();
 		skillsPane.requestFocus();
 		skillsPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		viewController.initChCreation2();
 	}
 	
 	private void showVillage() {

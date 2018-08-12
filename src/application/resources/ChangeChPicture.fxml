@@ -48,7 +48,7 @@
             </GridPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="122.0" text="Ok" />
+                  <Button mnemonicParsing="false" onMouseReleased="#closeChPictureSelected" prefHeight="31.0" prefWidth="122.0" text="Ok" />
                   <Button mnemonicParsing="false" onMouseReleased="#closeChPicture" prefHeight="31.0" prefWidth="122.0" text="Back" />
                </children>
             </HBox>

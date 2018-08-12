@@ -79,7 +79,7 @@
                                  </font>
                               </Label>
                               <Region prefHeight="73.0" prefWidth="25.0" />
-                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="91.0" text="100" />
+                              <TextField fx:id="textChCreationAvaiable" alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="91.0" text="100" />
                               <Region prefHeight="73.0" prefWidth="25.0" />
                            </children>
                         </HBox>
@@ -91,11 +91,11 @@
                                  </font>
                               </Label>
                               <Region prefHeight="85.0" prefWidth="25.0" />
-                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
-                              <VBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="59.0">
+                              <TextField fx:id="textChCreationStr" alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="69.0" text="100" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="49.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                    <Button fx:id="buttonChCreationUpStr" mnemonicParsing="false" onMouseReleased="#buttonChCreationUpStrClicked" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button fx:id="buttonChCreationDownStr" mnemonicParsing="false" onMouseReleased="#buttonChCreationDownStrClicked" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
                                  </children>
                               </VBox>
                            </children>
@@ -108,11 +108,11 @@
                                  </font>
                               </Label>
                               <Region prefHeight="85.0" prefWidth="22.0" />
-                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
-                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                              <TextField fx:id="textChCreationDex" alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="69.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="49.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                    <Button fx:id="buttonChCreationUpDex" mnemonicParsing="false" onMouseReleased="#buttonChCreationUpDexClicked" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button fx:id="buttonChCreationDownDex" mnemonicParsing="false" onMouseReleased="#buttonChCreationDownDexClicked" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
                                  </children>
                               </VBox>
                            </children>
@@ -125,11 +125,11 @@
                                  </font>
                               </Label>
                               <Region prefHeight="85.0" prefWidth="2.0" />
-                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
-                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                              <TextField fx:id="textChCreationCon" alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="69.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="49.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                    <Button fx:id="buttonChCreationUpCon" mnemonicParsing="false" onMouseReleased="#buttonChCreationUpConClicked" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button fx:id="buttonChCreationDownCon" mnemonicParsing="false" onMouseReleased="#buttonChCreationDownConClicked" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
                                  </children>
                               </VBox>
                            </children>
@@ -142,11 +142,11 @@
                                  </font>
                               </Label>
                               <Region prefHeight="85.0" prefWidth="5.0" />
-                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
-                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                              <TextField fx:id="textChCreationInt" alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="69.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="49.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                    <Button fx:id="buttonChCreationUpInt" mnemonicParsing="false" onMouseReleased="#buttonChCreationUpIntClicked" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button fx:id="buttonChCreationDownInt" mnemonicParsing="false" onMouseReleased="#buttonChCreationDownIntClicked" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
                                  </children>
                               </VBox>
                            </children>
@@ -159,11 +159,11 @@
                                  </font>
                               </Label>
                               <Region prefHeight="85.0" prefWidth="21.0" />
-                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
-                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                              <TextField fx:id="textChCreationCha" alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="69.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="49.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                    <Button fx:id="buttonChCreationUpCha" mnemonicParsing="false" onMouseReleased="#buttonChCreationUpChaClicked" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button fx:id="buttonChCreationDownCha" mnemonicParsing="false" onMouseReleased="#buttonChCreationDownChaClicked" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
                                  </children>
                               </VBox>
                            </children>
@@ -176,11 +176,11 @@
                                  </font>
                               </Label>
                               <Region prefHeight="85.0" prefWidth="59.0" />
-                              <TextField alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="59.0" text="50" />
-                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="59.0">
+                              <TextField fx:id="textChCreationLck" alignment="CENTER" editable="false" prefHeight="51.0" prefWidth="69.0" text="50" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="49.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
+                                    <Button fx:id="buttonChCreationUpLck" mnemonicParsing="false" onMouseReleased="#buttonChCreationUpLckClicked" prefHeight="24.0" prefWidth="27.0" styleClass="uparrow" />
+                                    <Button fx:id="buttonChCreationDownLck" mnemonicParsing="false" onMouseReleased="#buttonChCreationDownLckClicked" prefHeight="24.0" prefWidth="27.0" styleClass="downarrow" />
                                  </children>
                               </VBox>
                            </children>
@@ -234,7 +234,7 @@
                <children>
                   <Pane prefHeight="345.0" prefWidth="297.0" style="-fx-border-width: 5px; -fx-border-color: white;">
                      <children>
-                        <ImageView fitHeight="336.0" fitWidth="286.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true">
+                        <ImageView fx:id="imageChCreation" fitHeight="336.0" fitWidth="286.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true">
                            <image>
                               <Image url="@images/warrior1.jpg" />
                            </image>

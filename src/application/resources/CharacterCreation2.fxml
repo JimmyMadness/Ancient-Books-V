@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -41,18 +41,18 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="comboSkillsPrimary1" prefHeight="30.0" prefWidth="260.0" />
-                  <ChoiceBox fx:id="comboSkillsPrimary2" prefHeight="30.0" prefWidth="260.0" />
-                  <ChoiceBox fx:id="comboSkillsPrimary3" prefWidth="260.0" />
+                  <ComboBox fx:id="comboSkillsPrimary1" prefHeight="31.0" prefWidth="260.0" />
+                  <ComboBox fx:id="comboSkillsPrimary2" prefHeight="31.0" prefWidth="260.0" />
+                  <ComboBox fx:id="comboSkillsPrimary3" prefHeight="31.0" prefWidth="260.0" />
                   <Region prefHeight="33.0" prefWidth="800.0" />
                   <Label text="Secondary Skills">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="comboSkillsSecondary1" prefWidth="260.0" />
-                  <ChoiceBox fx:id="comboSkillsSecondary2" prefWidth="260.0" />
-                  <ChoiceBox fx:id="comboSkillsSecondary3" prefWidth="260.0" />
+                  <ComboBox fx:id="comboSkillsSecondary1" prefHeight="31.0" prefWidth="260.0" />
+                  <ComboBox fx:id="comboSkillsSecondary2" prefHeight="31.0" prefWidth="260.0" />
+                  <ComboBox fx:id="comboSkillsSecondary3" prefHeight="31.0" prefWidth="260.0" />
                </children>
                <padding>
                   <Insets top="20.0" />
