@@ -21,6 +21,7 @@ public class GameLoader {
 			in.close();
 			fileIn.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new LoadException();
 		}
 		return result;

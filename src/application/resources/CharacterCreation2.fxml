@@ -20,7 +20,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" onMouseReleased="#toChCreation" prefHeight="33.0" prefWidth="170.0" text="Back" />
-                  <Button mnemonicParsing="false" onMouseReleased="#toVillage" prefHeight="33.0" prefWidth="170.0" text="Confirm" />
+                  <Button mnemonicParsing="false" onMouseReleased="#confirmCharacterClicked" prefHeight="33.0" prefWidth="170.0" text="Confirm" />
                </children>
             </HBox>
          </bottom>

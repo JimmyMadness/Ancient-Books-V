@@ -33,7 +33,7 @@
                      <font>
                         <Font size="25.0" />
                      </font></Label>
-                  <Label styleClass="labelmain" text="Load Game" textFill="WHITE">
+                  <Label onMouseClicked="#LoadGameClick" styleClass="labelmain" text="Load Game" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font></Label>

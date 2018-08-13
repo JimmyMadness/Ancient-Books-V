@@ -30,6 +30,9 @@ public class Main extends Application implements ChangeViewListener{
 	private AnchorPane newGamePane;
 	private Scene newGameScene;
 	
+	private AnchorPane loadGamePane;
+	private Scene loadGameScene;
+	
 	private AnchorPane beginningPane;
 	private Scene beginningScene;
 	
@@ -73,6 +76,11 @@ public class Main extends Application implements ChangeViewListener{
 			newGamePane = (AnchorPane)loader.load();
 			newGameScene = new Scene(newGamePane);
 //			newGameScene.getStylesheets().add(getClass().getResource("resources/MainStyle.css").toExternalForm());
+			
+			loader = new FXMLLoader(Main.class.getResource("resources/LoadGame.fxml"));
+			loader.setController(viewController);
+			loadGamePane = (AnchorPane)loader.load();
+			loadGameScene = new Scene(loadGamePane);
 			
 			loader = new FXMLLoader(Main.class.getResource("resources/Beginning.fxml"));
 			loader.setController(viewController);
@@ -158,6 +166,18 @@ public class Main extends Application implements ChangeViewListener{
 		}
 	}
 	
+	private void showLoadGame() {
+		primaryStage.setScene(loadGameScene);
+		primaryStage.show();
+		loadGamePane.requestFocus();
+		loadGamePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		try {
+			viewController.initLoadGame();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}		
+	}
+	
 	private void showBeginning() {
 		primaryStage.setScene(beginningScene);
 		primaryStage.show();
@@ -178,7 +198,7 @@ public class Main extends Application implements ChangeViewListener{
 
 		changeChPictureStage.show();
 		changeChPicturePane.requestFocus();
-		chCreationPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+		changeChPicturePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		try {
 			viewController.initChangeChPicture();
 		} catch (FileNotFoundException e) {
@@ -205,6 +225,7 @@ public class Main extends Application implements ChangeViewListener{
 		villagePane.requestFocus();
 		villagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		viewController.setGameLocation(Location.VILLAGE);
+		viewController.initVillage();
 	}	
 	
 	private void showDungeon() {
@@ -237,6 +258,8 @@ public class Main extends Application implements ChangeViewListener{
 		switch (event.getView()) {
 			case NEWGAME: showNewGame();
 			break;
+			case LOADGAME: showLoadGame();
+			break;
 			case MAINMENU: showMainMenu();
 			break;
 			case BEGINNING: showBeginning();
@@ -261,7 +284,6 @@ public class Main extends Application implements ChangeViewListener{
 		}
 		
 	}
-
 
 
 

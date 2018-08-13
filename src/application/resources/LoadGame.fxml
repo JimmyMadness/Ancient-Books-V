@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import textfield.TextField20?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@MainStyle.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="800.0" spacing="15.0" style="-fx-background-color: black;">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="140.0" prefWidth="800.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="390.0">
+                     <children>
+                        <TextField20 fx:id="textLoadGame1" editable="false" onMouseClicked="#textLoadGame1Clicked" text="Game 1" />
+                        <Label fx:id="labelDateLoadGame1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+                  <ImageView fx:id="imageLoadGame1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@images/testcave2.jpg" />
+                     </image></ImageView>
+               </children>
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="124.0" prefWidth="800.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="390.0">
+                     <children>
+                        <TextField20 fx:id="textLoadGame2" editable="false" onMouseClicked="#textLoadGame2Clicked" text="Game 2" />
+                        <Label fx:id="labelDateLoadGame2">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+                  <ImageView fx:id="imageLoadGame2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@images/testcave2.jpg" />
+                     </image></ImageView>
+               </children>
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="390.0">
+                     <children>
+                        <TextField20 fx:id="textLoadGame3" editable="false" onMouseClicked="#textLoadGame3Clicked" text="Game 3" />
+                        <Label fx:id="labelDateLoadGame3">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+                  <ImageView fx:id="imageLoadGame3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@images/testcave2.jpg" />
+                     </image></ImageView>
+               </children>
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+               <children>
+                  <Button fx:id="buttonLoadGameOk" mnemonicParsing="false" onMouseReleased="#loadGameClicked" prefHeight="43.0" prefWidth="205.0" text="Load" />
+                  <Button mnemonicParsing="false" onMouseReleased="#toMainMenu" prefHeight="43.0" prefWidth="205.0" text="Back" />                 
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

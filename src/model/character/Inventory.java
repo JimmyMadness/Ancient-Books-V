@@ -46,12 +46,14 @@ public class Inventory implements Serializable {
 	
 	public void add(Item i) {
 		this.items.add(i);
-		weightListener.onCarryWeight(new CarryWeightEvent(this, getTotalWeight()));	
+		if (weightListener != null)
+			weightListener.onCarryWeight(new CarryWeightEvent(this, getTotalWeight()));	
 	}
 	
 	public void remove(Item i) {
 		this.items.remove(i);
-		weightListener.onCarryWeight(new CarryWeightEvent(this, getTotalWeight()));		
+		if (weightListener != null)
+			weightListener.onCarryWeight(new CarryWeightEvent(this, getTotalWeight()));		
 	}
 	
 	//unequipping gets directly called on the loadout

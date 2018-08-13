@@ -31,10 +31,10 @@
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <TextField20 prefHeight="51.0" prefWidth="423.0" promptText="Sir Fucksalot" />
+                  <TextField20 fx:id="textChCreationName" prefHeight="51.0" prefWidth="423.0" promptText="Sir Fucksalot" />
                   <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" selected="true" text="M">
+                        <RadioButton fx:id="radioChCreationMale" mnemonicParsing="false" selected="true" text="M">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -42,7 +42,7 @@
                               <ToggleGroup fx:id="sex" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="F" toggleGroup="$sex">
+                        <RadioButton fx:id="radioChCreationFemale" mnemonicParsing="false" text="F" toggleGroup="$sex">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -54,7 +54,7 @@
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <TextFieldNum prefHeight="51.0" prefWidth="93.0" promptText="18-99" />
+                  <TextFieldNum fx:id="textChCreationAge" prefHeight="51.0" prefWidth="93.0" promptText="18-99" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="10.0" top="10.0" />

@@ -19,7 +19,7 @@
          <bottom>
             <HBox alignment="CENTER_LEFT" prefHeight="128.0" prefWidth="809.0" spacing="40.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Buy" />
+                  <Button mnemonicParsing="false" onMouseReleased="#transactionButtonClicked" prefHeight="43.0" prefWidth="153.0" text="Buy" />
                   <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Show your items" />
                   <Region prefHeight="128.0" prefWidth="161.0" />
                   <Button mnemonicParsing="false" onMouseReleased="#toDungeon" prefHeight="43.0" prefWidth="153.0" text="Go Adventuring" />
@@ -79,12 +79,27 @@
          <left>
             <VBox maxWidth="406.0" minWidth="406.0" prefWidth="406.0" style="-fx-border-color: darkgrey; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Vendor's Items">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <ListView prefHeight="472.0" prefWidth="395.0" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Vendor's Items">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Region prefHeight="33.0" prefWidth="138.0" />
+                        <Label fx:id="villageGoldLabel" text="0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label text="g">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="villageItemList" prefHeight="472.0" prefWidth="395.0" />
                </children>
             </VBox>
          </left></BorderPane>

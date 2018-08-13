@@ -2,7 +2,7 @@ package model.Items;
 
 import java.io.Serializable;
 
-public abstract class Item implements Serializable{
+public class Item implements Serializable{
 	/**
 	 * 
 	 */
@@ -45,6 +45,11 @@ public abstract class Item implements Serializable{
 
 	public int getLevel() {
 		return level;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 	
 	

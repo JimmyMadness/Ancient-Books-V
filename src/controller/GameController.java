@@ -75,8 +75,21 @@ public class GameController {
 		//this.character = save.getCharacter();
 		
 	}
+	public void load(String savePath, boolean setAsCurrent) throws LoadException {
+		
+		this.save = gameLoader.load(savePath);
+		this.currentSavePath = savePath;
+		this.character = save.getCharacter();
+		
+	}
 	
+	public Character getCharacter() {
+		return character;
+	}
 
+	public Encyclopedia getEncyclopedia() {
+		return encyclopedia;
+	}
 	
 	
 }

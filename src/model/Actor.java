@@ -1,9 +1,14 @@
 package model;
 
+import java.io.Serializable;
 
-public abstract class Actor {
+public abstract class Actor implements Serializable{
 
 	
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -2934793841754362620L;
 		protected double maxHP;
 		protected double currentHP;
 		

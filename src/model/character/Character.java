@@ -51,15 +51,15 @@ public class Character extends Actor implements CarryWeightListener, Serializabl
 				xp, gold, inventory, skills);
 	
 	}
-	
+	/*
 	public static Character loadCharacter(Characteristics characteristics, double maxHP, String descritpion,
 			String name, int lvl, ActorID id,Encyclopedia encyclopedia, Sex sex, int age, String characterPicture,
 			RpgClass rpgClass, int xp, int gold, Inventory inventory, Skills skills, double carryWeight, double totalCarryWeight) {
 		return new Character(characteristics,  maxHP, descritpion, name, lvl, id, encyclopedia,  sex,  age,  characterPicture,
 			 rpgClass,  xp,  gold,  inventory,  skills);
-	}
+	}*/
 	
-	private Character(Characteristics characteristics, double maxHP, String descritpion,
+	public Character(Characteristics characteristics, double maxHP, String descritpion,
 			String name, int lvl, ActorID id,Encyclopedia encyclopedia, Sex sex, int age, String characterPicture,
 			RpgClass rpgClass, int xp, int gold, Inventory inventory, Skills skills) {
 		super(maxHP, descritpion, name, lvl, id, encyclopedia);

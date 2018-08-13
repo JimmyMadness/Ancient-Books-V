@@ -9,11 +9,14 @@ import java.util.Random;
 
 import model.Items.Item;
 import model.Items.ItemID;
+import model.Items.Shield;
 import model.Items.Weapon;
 import model.Items.WeaponHands;
 import model.Items.Armor;
 import model.Items.ArmorClass;
 import model.Items.ArmorPiece;
+import model.Items.Consumable;
+import model.Items.ConsumableId;
 import model.character.Character;
 import model.character.Inventory;
 import model.character.Loadout;
@@ -86,30 +89,77 @@ public class Encyclopedia {
 		
 		enemyItems.put("Goblin Shiv", new Weapon("Goblin Shiv", "Small and pointy", 5, 2d, ItemID.ONEHANDED, 8d,2d,0d,0d,WeaponHands.ONEHANDED,1,20d,1.5d,successText,failText));
 		
+		successText = new ArrayList<String>();
+		failText = new ArrayList<String>();
 		//ENEMY ARMORS
 		
 		enemyItems.put("Old Rag", new Armor("Old Rag", "It's stinky", 2, 2, ItemID.ARMOR, 1, 10d, 10d, ArmorPiece.CHEST, ArmorClass.LIGHT));
 		
 		//CHARACTER WEAPONS
 		
+		successText.add("You stabbed your opponent!");
+		failText.add("You swing your dagger unsuccesfully..");
+		allItems.put("Iron Dagger", new Weapon("Iron Dagger", "Once it fell so hard they made a city about it", 10,3d,ItemID.ONEHANDED,6,2,0,0,WeaponHands.ONEHANDED,1,33.3d,3d,successText,failText));
+		successText = new ArrayList<String>();
+		failText = new ArrayList<String>();
+		
+		successText.add("You slash a new wound in the foul creature!");
+		failText.add("You barely inflict a scratch..");
+		allItems.put("Short Iron Sword", new Weapon("Short Iron Sword", "Short but effective", 20,9d,ItemID.ONEHANDED,8,4,0,0,WeaponHands.ONEHANDED,2,20d,2.5d,successText,failText));
+		successText = new ArrayList<String>();
+		failText = new ArrayList<String>();
+		
+		successText.add("Your arrow hits the creature between its eyes!");
+		failText.add("Your arrow flies past your enemy into a wall..");
+		allItems.put("Short Wooden Bow", new Weapon("Short Wooden Bow", "Small and lightweight", 25,5d,ItemID.BOW,12,4,0,0,WeaponHands.TWOHANDED,2,25d,3d,successText,failText));
+		successText = new ArrayList<String>();
+		failText = new ArrayList<String>();
+		
+		successText.add("Your magic dart splashes in the monster's face!");
+		failText.add("Your wand fizzles and nothing happens, how embarassing");
+		allItems.put("Inferior Magic Wand", new Weapon("Inferior Magic Wand", "Capable of a little more than tricks", 40,3d,ItemID.MAGICWAND,12,2,0,0,WeaponHands.ONEHANDED,2,15d,2d,successText,failText));
+		successText = new ArrayList<String>();
+		failText = new ArrayList<String>();
+		
+		//CHARACTER SHIELDS
+		allItems.put("Wooden Shield", new Shield("Wooden Shield", "It's made of rotten wood", 10, 5, ItemID.SHIELD, WeaponHands.ONEHANDED, 1, 8d, 2d, ArmorClass.LIGHT));
+		
+		
 		//CHARACTER ARMORS
+		
+		allItems.put("Iron Helmet", new Armor("Iron Helmet", "Just like in Skyrim", 60, 5, ItemID.ARMOR, 2, 15d, 3d, ArmorPiece.HELMET, ArmorClass.HEAVY));
+		allItems.put("Iron Armor", new Armor("Iron Armor", "Just so you won't be naked", 125, 30, ItemID.ARMOR, 3, 25d, 10d, ArmorPiece.CHEST, ArmorClass.HEAVY));
+		allItems.put("Iron Greaves", new Armor("Iron Greaves", "Sturdy and effective", 40, 15, ItemID.ARMOR, 2, 10d, 5d, ArmorPiece.LEGS, ArmorClass.HEAVY));
+		allItems.put("Iron Gauntlets", new Armor("Iron Gauntlets", "Sturdy and effective", 25, 5, ItemID.ARMOR, 2, 10d, 1d, ArmorPiece.GAUNTLETS, ArmorClass.HEAVY));
+		allItems.put("Iron Boots", new Armor("Iron Boots", "Sturdy and effective", 25, 6, ItemID.ARMOR, 2, 10d, 2d, ArmorPiece.BOOTS, ArmorClass.HEAVY));
+		
+		allItems.put("Hide Helmet", new Armor("Hide Helmet", "Made out of a wolf's head", 25, 2, ItemID.ARMOR, 1, 10d, 8d, ArmorPiece.HELMET, ArmorClass.LIGHT));
+		allItems.put("Hide Armor", new Armor("Hide Armor", "Makes you feel like belonging in the wilderness", 50, 5, ItemID.ARMOR, 2, 20d, 10d, ArmorPiece.CHEST, ArmorClass.LIGHT));
+		allItems.put("Hide Leggings", new Armor("Hide Leggings", "Can't go around naked", 15, 2, ItemID.ARMOR, 1, 5d, 5d, ArmorPiece.LEGS, ArmorClass.LIGHT));
+		allItems.put("Hide Bracers", new Armor("Hide Bracers", "Minimal protection for your arms", 10, 1, ItemID.ARMOR, 1, 5d, 5d, ArmorPiece.GAUNTLETS, ArmorClass.LIGHT));
+		allItems.put("Hide Boots", new Armor("Hide Boots", "Better than barefeet", 10, 1, ItemID.ARMOR, 1, 5d, 5d, ArmorPiece.BOOTS, ArmorClass.LIGHT));
 		
 		//CHARACTER MISCELLANEOUS
 		
+		allItems.put("Goblin Amulet", new Item("Goblin Amulet", "Made out of mysterious bones", 20, 0.5, ItemID.TREASURE, 1));
+		
 		//CHARACTER CONSUMABLES
+		
+		allItems.put("Small Health Potion", new Consumable("Small Health Potion", "Restores a small amount of health", 17, 0.5d, ItemID.CONSUMABLE, 1, ConsumableId.POTION, 15));
 		
 		//ENEMIES
 		allEnemies.put("Small Goblin", new Enemy(15d, "Small and green, it watches you from the darkness", "Small Goblin",
-				 1, ActorID.GOBLIN, this, 70d,20d,10d,(Weapon)(enemyItems.get("Goblin Shiv")), (Armor)(enemyItems.get("Old Rag")), 20, 20, 2, 10, 10));
+				 1, ActorID.GOBLIN, this, 70d,25d,5d,(Weapon)(enemyItems.get("Goblin Shiv")), (Armor)(enemyItems.get("Old Rag")), 20, 20, 2, 10, 10));
 		
 		
 		
 	}
 	
 	public Inventory getStartingInventory(RpgClass rpgClass) {
-		Inventory startingInventory = null;
+		Inventory startingInventory = new Inventory();
 		if (rpgClass == RpgClass.WARRIOR) {
-			//hard coded starting inventory
+			startingInventory.add(new Item("Lucky Amulet", "A symbol of your new adventure", 100, 0.5, ItemID.TREASURE, 1));
+			startingInventory.add(allItems.get("Small Health Potion"));
 		}
 		if (rpgClass == RpgClass.MAGE) {
 			//hard coded starting inventory
@@ -122,9 +172,14 @@ public class Encyclopedia {
 	}
 
 	public Loadout getStartingLoadout(RpgClass rpgClass) {
-		Loadout startingLoadout = null;
+		Loadout startingLoadout = new Loadout();
 		if (rpgClass == RpgClass.WARRIOR) {
-			//hard coded starting loadout
+			startingLoadout.equip((Armor)allItems.get("Iron Helmet"));
+			startingLoadout.equip((Armor)allItems.get("Hide Boots"));
+			startingLoadout.equip((Armor)allItems.get("Hide Armor"));
+			startingLoadout.equip((Weapon)allItems.get("Short Iron Sword"));
+			startingLoadout.equip((Shield)allItems.get("Wooden Shield"));
+			
 		}
 		if (rpgClass == RpgClass.MAGE) {
 			//hard coded starting loadout
@@ -312,10 +367,12 @@ public class Encyclopedia {
 		int enemyLevel = c.getLvl() + (int)Math.round((r.nextDouble()*5)- c.getSkills().getDungeoneering()/20);
 		if (enemyLevel<1)
 			enemyLevel = 1;
+		if (enemyLevel>20)
+			enemyLevel = 20;
 		List<Enemy> enemies = new ArrayList<Enemy>(allEnemies.values());
 		List<Enemy> enemiesWithCorrectLevel = new ArrayList<Enemy>();
 		//using streams and filters would be better
-		//by design there is at least one enemy from lvl 1 to maxCharacterLevel +5
+		//the maximum level of the enemies should be the same as the character, so that having 100 dungeoneering won't prevent the character from finding cool enemies
 		for (Enemy e : enemies) {
 			if (e.getLvl() == enemyLevel)
 				enemiesWithCorrectLevel.add(e);
