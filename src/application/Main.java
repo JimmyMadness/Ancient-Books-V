@@ -155,27 +155,29 @@ public class Main extends Application implements ChangeViewListener{
 	}
 
 	private void showNewGame() {
-		primaryStage.setScene(newGameScene);
-		primaryStage.show();
-		newGamePane.requestFocus();
-		newGamePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		try {
 			viewController.initNewGame();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		primaryStage.setScene(newGameScene);
+		primaryStage.show();
+		newGamePane.requestFocus();
+		newGamePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+
 	}
 	
 	private void showLoadGame() {
-		primaryStage.setScene(loadGameScene);
-		primaryStage.show();
-		loadGamePane.requestFocus();
-		loadGamePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		try {
 			viewController.initLoadGame();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}		
+		}	
+		primaryStage.setScene(loadGameScene);
+		primaryStage.show();
+		loadGamePane.requestFocus();
+		loadGamePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+	
 	}
 	
 	private void showBeginning() {
@@ -187,23 +189,24 @@ public class Main extends Application implements ChangeViewListener{
 	}
 	
 	private void showChCreation() {
+		viewController.initChCreation();
 		primaryStage.setScene(chCreationScene);
 		primaryStage.show();
 		chCreationPane.requestFocus();
 		chCreationPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
-		viewController.initChCreation();
+
 	}
 	
 	private void showChangeChPicture() {
-
-		changeChPictureStage.show();
-		changeChPicturePane.requestFocus();
-		changeChPicturePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		try {
 			viewController.initChangeChPicture();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		changeChPictureStage.show();
+		changeChPicturePane.requestFocus();
+		changeChPicturePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
+
 		
 	}
 	private void closeChangeChPicture() {
@@ -212,20 +215,21 @@ public class Main extends Application implements ChangeViewListener{
 	}
 	
 	private void showSkills() {
+		viewController.initChCreation2();
 		primaryStage.setScene(skillsScene);
 		primaryStage.show();
 		skillsPane.requestFocus();
 		skillsPane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
-		viewController.initChCreation2();
+
 	}
 	
 	private void showVillage() {
+		viewController.initVillage();
 		primaryStage.setScene(villageScene);
 		primaryStage.show();
 		villagePane.requestFocus();
 		villagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		viewController.setGameLocation(Location.VILLAGE);
-		viewController.initVillage();
 	}	
 	
 	private void showDungeon() {
@@ -237,9 +241,10 @@ public class Main extends Application implements ChangeViewListener{
 	}
 	
 	private void showCharacterPage() {
+		viewController.initCharacterPage();
 		primaryStage.setScene(chPageScene);
 		primaryStage.show();
-		chPagePane.requestFocus();
+		chPagePane.requestFocus();	
 		chPagePane.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 		
 	}

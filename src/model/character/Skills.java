@@ -1,15 +1,19 @@
 package model.character;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Skills implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6610947169817052636L;
-	private SkillsType primarySKills[];
+	private SkillsType primarySkills[];
 	private SkillsType secondarySkills[];
-	private int oneHanded;
+	private SkillsType miscellaneousSkills[]
+;	private int oneHanded;
 	private int twoHanded;
 	private int archery;
 	private int block;
@@ -21,11 +25,11 @@ public class Skills implements Serializable{
 	private int haggling;
 	private int dungeoneering;
 	
-	public Skills(SkillsType[] primarySKills, SkillsType[] secondarySkills, int oneHanded, int twoHanded, int archery,
+	public Skills(SkillsType[] primarySkills, SkillsType[] secondarySkills, int oneHanded, int twoHanded, int archery,
 			int block, int dodge, int lightArmor, int heavyArmor, int criticalStrike, int magicPower, int haggling,
 			int dungeoneering) {
 		super();
-		this.primarySKills = primarySKills;
+		this.primarySkills = primarySkills;
 		this.secondarySkills = secondarySkills;
 		this.oneHanded = oneHanded;
 		this.twoHanded = twoHanded;
@@ -38,10 +42,20 @@ public class Skills implements Serializable{
 		this.magicPower = magicPower;
 		this.haggling = haggling;
 		this.dungeoneering = dungeoneering;
+		Set<SkillsType> setPrimary = new HashSet<SkillsType>(Arrays.asList(primarySkills));
+		Set<SkillsType> setSecondary = new HashSet<SkillsType>(Arrays.asList(secondarySkills));
+		Set<SkillsType> setTotal = new HashSet<SkillsType>(Arrays.asList(SkillsType.values()));
+		setTotal.remove(SkillsType.NONE);
+		setTotal.removeAll(setPrimary);
+		setTotal.removeAll(setSecondary);
+		this.miscellaneousSkills = new SkillsType[setTotal.size()]; 
+		setTotal.toArray(this.miscellaneousSkills);
+		
+	
 	}
 
-	public SkillsType[] getPrimarySKills() {
-		return primarySKills;
+	public SkillsType[] getPrimarySkills() {
+		return primarySkills;
 	}
 
 	public SkillsType[] getSecondarySkills() {
@@ -93,6 +107,51 @@ public class Skills implements Serializable{
 	}
 	
 	
+	public SkillsType[] getMiscellaneousSkills() {
+		return miscellaneousSkills;
+	}
+	
+	//i from 1-3 -->primary
+	//from 4-6 -->secondary
+	//7-11 -->miscellaneous
+	public int getSkill(int i) {
+		SkillsType skill = SkillsType.NONE;
+		int result = -1;
+		if (i<=3) 
+			skill = primarySkills[i-1];
+		if (i>3 && i<=6)	
+			skill = secondarySkills[i-4];
+		if (i>6 && i<=11)
+			skill = miscellaneousSkills[i-7];
+		switch (skill) {
+		case ONEHANDED: result=oneHanded;
+		break;
+		case TWOHANDED: result=twoHanded;
+		break;
+		case ARCHERY: result=archery;
+		break;
+		case BLOCK: result=block;
+		break;
+		case DODGE: result=dodge;
+		break;
+		case LIGHTARMOR: result=lightArmor;
+		break;
+		case HEAVYARMOR: result=heavyArmor;
+		break;
+		case CRITICALSTRIKE: result=criticalStrike;
+		break; 
+		case MAGICPOWER: result=magicPower;
+		break;
+		case HAGGLING: result=haggling;
+		break;
+		case DUNGEONEERING: result=dungeoneering;
+		break;
+		case NONE: result=-1;
+		break;
+		}
+		return result;
+	}
+
 	//the amount of avaiable skillpoints removed gets calculated from the caller of this method
 	public boolean increase(SkillsType s) {
 		boolean result = false;
@@ -163,6 +222,10 @@ public class Skills implements Serializable{
 				dungeoneering++;
 				result = true;
 			}
+			break;
+		case NONE:
+			break;
+		default:
 			break;	
 		}
 		return result;

@@ -8,9 +8,13 @@ import persistance.GameLoader;
 import persistance.GameSaver;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import exceptions.LoadException;
 import model.*;
+import model.Items.Item;
 
 public class GameController {
 
@@ -20,11 +24,13 @@ public class GameController {
 	private String currentSavePath;
 	private GameSaver gameSaver;
 	private GameLoader gameLoader;
+	private Shop villageShop;
 	
 	public GameController() {
 		this.encyclopedia = new Encyclopedia();
 		this.gameSaver = new GameSaver();
 		this.gameLoader = new GameLoader();
+		this.villageShop = new Shop();
 		
 		//be careful, until we load a game (or make a new save file) the controller won't have a character and a save
 		this.character = null;
@@ -91,5 +97,27 @@ public class GameController {
 		return encyclopedia;
 	}
 	
+	public Shop getShop() {
+		return villageShop;
+	}
+	
+	
+	public void shopRefresh() {
+		villageShop.setShop(encyclopedia.getShopList(character));
+		villageShop.setPriceModifier(character);
+		villageShop.setAvaiableGold(character);
+		villageShop.setShopEntries();
+	}
+		
+	public List<ShopEntry> getChInventoryForShop(){
+		List <ShopEntry> result = new ArrayList<ShopEntry>();
+		for(Item i : character.getInventory().getItems()) {
+			result.add(new ShopEntry(i.getName(),
+					Collections.frequency(character.getInventory().getItems(), i),
+					(int) Math.round(i.getValue()/villageShop.getPriceModifier())));
+		}
+		return result;			
+		
+	}
 	
 }

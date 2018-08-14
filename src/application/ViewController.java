@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.List;
 import java.util.Map;
 
 import exceptions.LoadException;
@@ -16,6 +17,7 @@ import events.ChangeViewListener;
 import events.SkillsComboListener;
 import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +31,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,9 +43,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import model.Location;
 import model.Save;
+import model.ShopEntry;
 import model.Items.Item;
 import model.character.RpgClass;
 import model.character.Sex;
@@ -388,40 +395,37 @@ public class ViewController {
 	
 	@FXML //clicking on the textFields
 	public void textLoadGame1Clicked(Event e) {
-		//if i click on a textField the selected Save becomes the one i clicked on
-		selectedSave = "Save1";
-		//it's border is the only one that becomes yellow
-		textLoadGame1.setStyle("-fx-border-color: yellow");
-		textLoadGame2.setStyle("-fx-border-color: black");
-		textLoadGame3.setStyle("-fx-border-color: black");
-		if (textLoadGame1.getText().equals("Game 1"))
-			buttonLoadGameOk.setDisable(true);
-		else
+		if (!textLoadGame1.getText().equals("Game 1")) {
 			buttonLoadGameOk.setDisable(false);
+			//if i click on a textField the selected Save becomes the one i clicked on
+			selectedSave = "Save1";
+			//it's border is the only one that becomes yellow
+			textLoadGame1.setStyle("-fx-border-color: yellow");
+			textLoadGame2.setStyle("-fx-border-color: black");
+			textLoadGame3.setStyle("-fx-border-color: black");
+		}
 	}
 
 	@FXML
 	public void textLoadGame2Clicked(Event e) {
-		selectedSave = "Save2";
-		textNewGame1.setStyle("-fx-border-color: black");
-		textNewGame2.setStyle("-fx-border-color: yellow");
-		textNewGame3.setStyle("-fx-border-color: black");
-		if (textLoadGame2.getText().equals("Game 2"))
-			buttonLoadGameOk.setDisable(true);
-		else
+		if (!textLoadGame2.getText().equals("Game 2")) {
 			buttonLoadGameOk.setDisable(false);
+			selectedSave = "Save2";
+			textLoadGame1.setStyle("-fx-border-color: black");
+			textLoadGame2.setStyle("-fx-border-color: yellow");
+			textLoadGame3.setStyle("-fx-border-color: black");
+		}
 	}
 
 	@FXML
 	public void textLoadGame3Clicked(Event e) {
-		selectedSave = "Save3";
-		textNewGame1.setStyle("-fx-border-color: black");
-		textNewGame2.setStyle("-fx-border-color: black");
-		textNewGame3.setStyle("-fx-border-color: yellow");
-		if (textLoadGame3.getText().equals("Game 3"))
-			buttonLoadGameOk.setDisable(true);
-		else
+		if (!textLoadGame3.getText().equals("Game 3")) {
 			buttonLoadGameOk.setDisable(false);
+			selectedSave = "Save3";
+			textLoadGame1.setStyle("-fx-border-color: black");
+			textLoadGame2.setStyle("-fx-border-color: black");
+			textLoadGame3.setStyle("-fx-border-color: yellow");
+		}
 	}
 
 	
@@ -454,19 +458,21 @@ public class ViewController {
 	//FROM LOAD SCREEN....
 	@FXML
 	public void loadGameClicked(Event e) throws LoadException {
-		//once i click ok and select my save i go to Village
-				if (changeViewListener != null) {
-					changeViewListener.onChangeView(new ChangeViewEvent(this, Views.VILLAGE));
-					
-					//based on the slot i selected i load the game 
-					// calling the load method with true sets teh controller save and character as the ones loaded
-					if (selectedSave.equals("Save1")) 
-						gameController.load("src/application/resources/saves/Save1.ser",true);					
-					if (selectedSave.equals("Save2")) 
-						gameController.load("src/application/resources/saves/Save2.ser",true);					
-					if (selectedSave.equals("Save3")) 
-						gameController.load("src/application/resources/saves/Save3.ser",true);					
-				}
+
+		// based on the slot i selected i load the game
+		// calling the load method with true sets teh controller save and character as
+		// the ones loaded
+		if (selectedSave.equals("Save1"))
+			gameController.load("src/application/resources/saves/Save1.ser", true);
+		if (selectedSave.equals("Save2"))
+			gameController.load("src/application/resources/saves/Save2.ser", true);
+		if (selectedSave.equals("Save3"))
+			gameController.load("src/application/resources/saves/Save3.ser", true);
+
+		if (changeViewListener != null) {
+			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.VILLAGE));
+		}
+				
 	}
 	
 	//
@@ -926,19 +932,131 @@ public class ViewController {
 	@FXML
 	private Label villageGoldLabel;
 	@FXML
-	private ListView<Item> villageItemList;
+	private Label villageChGoldLabel;
+	@FXML
+	private Label villageTitleLabel;
+	@FXML
+	private Button villageTransactionButton;
+	@FXML
+	private Button villageItemsShownButton;
+	@FXML
+	private Label villageChNameLabel;
+	@FXML
+	private Label villageChClassLabel;
+	@FXML
+	private Label villageChHpLabel;
+	@FXML
+	private Label villageChXpLabel;
+	
+	@FXML
+	private ImageView villageChImage;
+	
+	@FXML
+	private TableView<ShopEntry> villageItemTable;
+	@FXML
+	private TableColumn<ShopEntry,String> villageItemList;
+	@FXML
+	private TableColumn<ShopEntry,Integer> villageQuantityList;
+	@FXML
+	private TableColumn<ShopEntry,Integer> villagePriceList;
+	
+	private boolean isShopShown;
+	private boolean doIRefreshShop = true;
 	
 	public void initVillage() {
-		villageGoldLabel.setText(String.valueOf(gameController.getCharacter().getGold()));
-		Map<Item, Integer> items = gameController.getEncyclopedia().getShopList(gameController.getCharacter());
-		ObservableList<Item> observableItems = FXCollections.observableArrayList(items.keySet());
-		villageItemList.setItems(observableItems);
+		//villageItemTable.getSelectionModel().setCellSelectionEnabled(true);
+		isShopShown = true;
+		villageQuantityList.setStyle( "-fx-alignment: CENTER;");
+		villagePriceList.setStyle( "-fx-alignment: CENTER;");
+		villageChGoldLabel.setText(String.valueOf(gameController.getCharacter().getGold()));
+		if (doIRefreshShop) {	
+			gameController.shopRefresh();
+			doIRefreshShop = false;
+		}
+		List<ShopEntry> items = gameController.getShop().getShopEntries();
+		//i show the shop's gold after it's been refreshed
+		villageGoldLabel.setText(String.valueOf(gameController.getShop().getAvaiableGold()));
+		ObservableList<ShopEntry> observableItems = FXCollections.observableArrayList(items);
+		villageItemTable.setItems(observableItems);
+		villageItemList.setCellValueFactory(new Callback<CellDataFeatures<ShopEntry, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<ShopEntry, String> entry) {
+		         return entry.getValue().getItemName();
+		     }
+		  });
 		
+		villageQuantityList.setCellValueFactory(new Callback<CellDataFeatures<ShopEntry, Integer>, ObservableValue<Integer>>() {
+		     public ObservableValue<Integer> call(CellDataFeatures<ShopEntry, Integer> entry) {
+		         return entry.getValue().getItemQuantity().asObject();
+		     }
+		  });
+		
+		villagePriceList.setCellValueFactory(new Callback<CellDataFeatures<ShopEntry, Integer>, ObservableValue<Integer>>() {
+		     public ObservableValue<Integer> call(CellDataFeatures<ShopEntry, Integer> entry) {
+		         return entry.getValue().getItemPrice().asObject();
+		     }
+		  });
+		
+		//initializing character info
+		villageChNameLabel.setText(gameController.getCharacter().getName());
+		try {
+			villageChImage.setImage(new Image(new FileInputStream(gameController.getCharacter().getCharacterPicture())));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		villageChClassLabel.setText(gameController.getCharacter().getRpgClass() + " lvl " + gameController.getCharacter().getLvl());
+		villageChHpLabel.setText(gameController.getCharacter().getCurrentHP() + "/" + gameController.getCharacter().getMaxHP() + " Hp");
+		villageChXpLabel.setText(gameController.getCharacter().getXp() + " Xp");
 	}
 	
 	@FXML
 	public void transactionButtonClicked(Event e) {
-		gameController.getCharacter().setGold(gameController.getCharacter().getGold()+10);
+		ShopEntry entryForTransaction = villageItemTable.getSelectionModel().getSelectedItem();
+		if (entryForTransaction != null)
+			if (isShopShown) {
+				Item toBuy = gameController.getShop().getItems().keySet().stream().filter(
+						item->item.getName().equals(entryForTransaction.getItemName().get())).findFirst().get(); 
+				if (gameController.getShop().canSell(toBuy, gameController.getCharacter())) {
+					gameController.getShop().sell(toBuy, gameController.getCharacter());
+					entryForTransaction.getItemQuantity().setValue(entryForTransaction.getItemQuantity().get()-1);
+					if (entryForTransaction.getItemQuantity().get() <= 0)
+						villageItemTable.getItems().remove(entryForTransaction);
+				}
+			}
+			else {
+				Item toSell = gameController.getCharacter().getInventory().getItems().stream().filter(
+						item->item.getName().equals(entryForTransaction.getItemName().get())).findFirst().get(); 
+				if (gameController.getShop().canBuy(toSell)) {
+					gameController.getShop().buy(toSell, gameController.getCharacter());
+					entryForTransaction.getItemQuantity().setValue(entryForTransaction.getItemQuantity().get()-1);
+					if (entryForTransaction.getItemQuantity().get() <= 0)
+						villageItemTable.getItems().remove(entryForTransaction);
+				}
+				
+			}
+		villageChGoldLabel.setText(String.valueOf(gameController.getCharacter().getGold()));
+		villageGoldLabel.setText(String.valueOf(gameController.getShop().getAvaiableGold()));
+	}
+	
+	@FXML
+	public void itemsShownChange(Event e) {	
+		if (isShopShown) {
+			List<ShopEntry> chItems = gameController.getChInventoryForShop();
+			ObservableList<ShopEntry> observableChItems = FXCollections.observableArrayList(chItems);
+			villageItemTable.setItems(observableChItems);
+			villageTransactionButton.setText("Sell");
+			villageItemsShownButton.setText("Show the shop's items");
+			villageTitleLabel.setText("Your Inventory");
+			isShopShown = false;
+		}
+		else {
+			List<ShopEntry> items = gameController.getShop().getShopEntries();
+			ObservableList<ShopEntry> observableItems = FXCollections.observableArrayList(items);
+			villageItemTable.setItems(observableItems);
+			villageTransactionButton.setText("Buy");
+			villageItemsShownButton.setText("Show your items");
+			villageTitleLabel.setText("Vendor's Items");
+			isShopShown = true;
+		}
 	}
 	
 	@FXML
@@ -946,6 +1064,123 @@ public class ViewController {
 		if (changeViewListener != null) {
 			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.CHARACTERPAGE));
 		}
+	}
+	
+	
+	//CHARACHTER PAGE
+	
+	@FXML
+	private Label chPageNameLabel;
+	@FXML
+	private Label chPageClassLabel;
+	@FXML
+	private Label chPageHpLabel;
+	@FXML
+	private Label chPageXpLabel;
+	
+	@FXML
+	private TextField chPageStrText;
+	@FXML
+	private TextField chPageDexText;
+	@FXML
+	private TextField chPageConText;
+	@FXML
+	private TextField chPageIntText;
+	@FXML
+	private TextField chPageChaText;
+	@FXML
+	private TextField chPageLckText;
+	
+	@FXML
+	private Label chPageSkill1Label;
+	@FXML
+	private Label chPageSkill2Label;
+	@FXML
+	private Label chPageSkill3Label;
+	@FXML
+	private Label chPageSkill4Label;
+	@FXML
+	private Label chPageSkill5Label;
+	@FXML
+	private Label chPageSkill6Label;
+	@FXML
+	private Label chPageSkill7Label;
+	@FXML
+	private Label chPageSkill8Label;
+	@FXML
+	private Label chPageSkill9Label;
+	@FXML
+	private Label chPageSkill10Label;
+	@FXML
+	private Label chPageSkill11Label;
+	
+	@FXML
+	private TextField chPageSkill1Text;
+	@FXML
+	private TextField chPageSkill2Text;
+	@FXML
+	private TextField chPageSkill3Text;
+	@FXML
+	private TextField chPageSkill4Text;
+	@FXML
+	private TextField chPageSkill5Text;
+	@FXML
+	private TextField chPageSkill6Text;
+	@FXML
+	private TextField chPageSkill7Text;
+	@FXML
+	private TextField chPageSkill8Text;
+	@FXML
+	private TextField chPageSkill9Text;
+	@FXML
+	private TextField chPageSkill10Text;
+	@FXML
+	private TextField chPageSkill11Text;
+	
+	
+	public void initCharacterPage() {
+		chPageNameLabel.setText(gameController.getCharacter().getName());
+		try {
+			villageChImage.setImage(new Image(new FileInputStream(gameController.getCharacter().getCharacterPicture())));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		chPageClassLabel.setText(gameController.getCharacter().getRpgClass() + " lvl " + gameController.getCharacter().getLvl());
+		chPageHpLabel.setText(gameController.getCharacter().getCurrentHP() + "/" + gameController.getCharacter().getMaxHP() + " Hp");
+		chPageXpLabel.setText(gameController.getCharacter().getXp() + " Xp");
+		
+		chPageStrText.setText(String.valueOf(gameController.getCharacter().getCharacteristics().getStr()));
+		chPageDexText.setText(String.valueOf(gameController.getCharacter().getCharacteristics().getDex()));
+		chPageConText.setText(String.valueOf(gameController.getCharacter().getCharacteristics().getCon()));
+		chPageIntText.setText(String.valueOf(gameController.getCharacter().getCharacteristics().getIntl()));
+		chPageChaText.setText(String.valueOf(gameController.getCharacter().getCharacteristics().getCha()));
+		chPageLckText.setText(String.valueOf(gameController.getCharacter().getCharacteristics().getLck()));
+		
+		chPageSkill1Label.setText(gameController.getCharacter().getSkills().getPrimarySkills()[0].toString());
+		chPageSkill2Label.setText(gameController.getCharacter().getSkills().getPrimarySkills()[1].toString());
+		chPageSkill3Label.setText(gameController.getCharacter().getSkills().getPrimarySkills()[2].toString());
+		chPageSkill4Label.setText(gameController.getCharacter().getSkills().getSecondarySkills()[0].toString());
+		chPageSkill5Label.setText(gameController.getCharacter().getSkills().getSecondarySkills()[1].toString());
+		chPageSkill6Label.setText(gameController.getCharacter().getSkills().getSecondarySkills()[2].toString());
+		chPageSkill7Label.setText(gameController.getCharacter().getSkills().getMiscellaneousSkills()[0].toString());
+		chPageSkill8Label.setText(gameController.getCharacter().getSkills().getMiscellaneousSkills()[1].toString());
+		chPageSkill9Label.setText(gameController.getCharacter().getSkills().getMiscellaneousSkills()[2].toString());
+		chPageSkill10Label.setText(gameController.getCharacter().getSkills().getMiscellaneousSkills()[3].toString());
+		chPageSkill11Label.setText(gameController.getCharacter().getSkills().getMiscellaneousSkills()[4].toString());
+		
+		chPageSkill1Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(1)));
+		chPageSkill2Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(2)));
+		chPageSkill3Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(3)));
+		chPageSkill4Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(4)));
+		chPageSkill5Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(5)));
+		chPageSkill6Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(6)));
+		chPageSkill7Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(7)));
+		chPageSkill8Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(8)));
+		chPageSkill9Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(9)));
+		chPageSkill10Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(10)));
+		chPageSkill11Text.setText(String.valueOf(gameController.getCharacter().getSkills().getSkill(11)));
+		
+		
 	}
 	
 	@FXML

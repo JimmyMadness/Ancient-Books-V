@@ -21,22 +21,22 @@
          <top>
             <HBox alignment="CENTER" prefHeight="66.0" prefWidth="800.0" spacing="50.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Jimmy Madness Puzza">
+                  <Label fx:id="chPageNameLabel" text="Jimmy Madness Puzza">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Warrior lvl.1">
+                  <Label fx:id="chPageClassLabel" text="Warrior lvl.1">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Hp 10/10">
+                  <Label fx:id="chPageHpLabel" text="Hp 10/10">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="0XP">
+                  <Label fx:id="chPageXpLabel" text="0XP">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -47,7 +47,7 @@
          <left>
             <VBox alignment="TOP_CENTER" prefHeight="534.0" prefWidth="263.0" spacing="40.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="229.0" fitWidth="191.0" pickOnBounds="true">
+                  <ImageView fx:id="chPageImage" fitHeight="229.0" fitWidth="191.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/warrior1.jpg" />
                      </image>
@@ -85,7 +85,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField editable="false" prefHeight="51.0" prefWidth="59.0" text="asd" GridPane.columnIndex="1" />
+                              <TextField fx:id="chPageStrText" editable="false" prefHeight="51.0" prefWidth="59.0" text="asd" GridPane.columnIndex="1" />
                               <Label text="Dexterity" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="18.0" />
@@ -111,11 +111,11 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField fx:id="chPageDexText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="chPageConText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="chPageIntText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="chPageChaText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="chPageLckText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                      </children>
@@ -144,28 +144,28 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="One-Handed">
+                              <Label fx:id="chPageSkill1Label" text="One-Handed">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Two-Handed" GridPane.rowIndex="1">
+                              <Label fx:id="chPageSkill2Label" text="Two-Handed" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Light Armor" GridPane.rowIndex="2">
+                              <Label fx:id="chPageSkill3Label" text="Light Armor" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" text="asd" GridPane.columnIndex="1">
+                              <TextField fx:id="chPageSkill1Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" text="asd" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </TextField>
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="chPageSkill2Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="chPageSkill3Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label text="Secondary Skills">
@@ -184,24 +184,24 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Heavy Armor">
+                              <Label fx:id="chPageSkill4Label" text="Heavy Armor">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Archery" GridPane.rowIndex="1">
+                              <Label fx:id="chPageSkill5Label" text="Archery" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Dodge" GridPane.rowIndex="2">
+                              <Label fx:id="chPageSkill6Label" text="Dodge" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField editable="false" prefHeight="5.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="chPageSkill4Text" editable="false" prefHeight="5.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
+                              <TextField fx:id="chPageSkill5Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="chPageSkill6Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label text="Miscellaneous Skills">
@@ -222,36 +222,36 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Critical Strike">
+                              <Label fx:id="chPageSkill7Label" text="Critical Strike">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Magic Power" GridPane.rowIndex="1">
+                              <Label fx:id="chPageSkill8Label" text="Magic Power" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Haggling" GridPane.rowIndex="2">
+                              <Label fx:id="chPageSkill9Label" text="Haggling" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Dungeoneering" GridPane.rowIndex="3">
+                              <Label fx:id="chPageSkill10Label" text="Dungeoneering" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label text="Block" GridPane.rowIndex="4">
+                              <Label fx:id="chPageSkill11Label" text="Block" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="chPageSkill7Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" />
+                              <TextField fx:id="chPageSkill9Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="chPageSkill8Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="chPageSkill10Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="chPageSkill11Text" editable="false" prefHeight="0.0" prefWidth="59.0" styleClass="small" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
                      </children></VBox>

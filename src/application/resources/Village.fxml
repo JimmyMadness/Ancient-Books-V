@@ -3,13 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -19,8 +23,8 @@
          <bottom>
             <HBox alignment="CENTER_LEFT" prefHeight="128.0" prefWidth="809.0" spacing="40.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onMouseReleased="#transactionButtonClicked" prefHeight="43.0" prefWidth="153.0" text="Buy" />
-                  <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="153.0" text="Show your items" />
+                  <Button fx:id="villageTransactionButton" mnemonicParsing="false" onMouseReleased="#transactionButtonClicked" prefHeight="43.0" prefWidth="153.0" text="Buy" />
+                  <Button fx:id="villageItemsShownButton" mnemonicParsing="false" onMouseReleased="#itemsShownChange" prefHeight="43.0" prefWidth="153.0" text="Show your items" />
                   <Region prefHeight="128.0" prefWidth="161.0" />
                   <Button mnemonicParsing="false" onMouseReleased="#toDungeon" prefHeight="43.0" prefWidth="153.0" text="Go Adventuring" />
                </children>
@@ -46,31 +50,45 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="174.0" prefWidth="233.0">
                      <children>
-                        <Label text="Jimmy Madness Puzza">
+                        <Label fx:id="villageChNameLabel" text="Jimmy Madness Puzza">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="150.0" fitWidth="155.0" pickOnBounds="true">
+                        <ImageView fx:id="villageChImage" fitHeight="150.0" fitWidth="155.0" pickOnBounds="true">
                            <image>
                               <Image url="@images/warrior1.jpg" />
                            </image>
                         </ImageView>
-                        <Label text="Warrior Lvl 1">
+                        <Label fx:id="villageChClassLabel" text="Warrior Lvl 1">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="10/10 Hp">
+                        <Label fx:id="villageChHpLabel" text="10/10 Hp">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="0 Xp">
+                        <Label fx:id="villageChXpLabel" text="0 Xp">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <HBox alignment="CENTER" prefHeight="9.0" prefWidth="226.0">
+                           <children>
+                              <Label fx:id="villageChGoldLabel" text="0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="g">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
@@ -79,29 +97,46 @@
          <left>
             <VBox maxWidth="406.0" minWidth="406.0" prefWidth="406.0" style="-fx-border-color: darkgrey; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT">
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="291.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="127.0" minWidth="0.0" prefWidth="85.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="20.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <Label text="Vendor's Items">
+                        <Label fx:id="villageTitleLabel" text="Vendor's Items">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Region prefHeight="33.0" prefWidth="138.0" />
-                        <Label fx:id="villageGoldLabel" text="0">
+                        <Label fx:id="villageGoldLabel" text="0" GridPane.columnIndex="1">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label text="g">
+                        <Label text="g" GridPane.columnIndex="2">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
                      </children>
-                  </HBox>
-                  <ListView fx:id="villageItemList" prefHeight="472.0" prefWidth="395.0" />
+                  </GridPane>
+                  <TableView fx:id="villageItemTable" prefHeight="443.0" prefWidth="396.0">
+                    <columns>
+                      <TableColumn fx:id="villageItemList" editable="false" prefWidth="257.0" resizable="false" sortable="false" text="Item" />
+                      <TableColumn fx:id="villageQuantityList" editable="false" prefWidth="69.0" resizable="false" sortable="false" text="Qt" />
+                        <TableColumn fx:id="villagePriceList" editable="false" prefWidth="62.0" resizable="false" sortable="false" text="G" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
                </children>
             </VBox>
          </left></BorderPane>
+      <Region prefHeight="33.0" prefWidth="138.0" />
    </children>
 </AnchorPane>
