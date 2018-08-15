@@ -1,8 +1,8 @@
 package model.Items;
 
-import java.util.Optional;
 
-public class EquippableItemHands extends EquippableItem {
+
+public abstract class EquippableItemHands extends EquippableItem {
 
 	/**
 	 * 
@@ -23,16 +23,9 @@ public class EquippableItemHands extends EquippableItem {
 
 
 
-	@Override
-	public Optional<EquippableItem> Equip() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public boolean isEquipped() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
+
+	public abstract String itemToString();
 
 }

@@ -250,6 +250,7 @@ public class Main extends Application implements ChangeViewListener{
 	}
 	
 	private void showInventory() {
+		viewController.initInventory();
 		primaryStage.setScene(inventoryScene);
 		primaryStage.show();
 		inventoryPane.requestFocus();

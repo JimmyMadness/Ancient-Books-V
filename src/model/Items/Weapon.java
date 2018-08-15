@@ -1,7 +1,7 @@
 package model.Items;
 
 import java.util.List;
-import java.util.Optional;
+
 import java.util.Random;
 
 public class Weapon extends EquippableItemHands implements HasDamage{
@@ -92,16 +92,16 @@ public class Weapon extends EquippableItemHands implements HasDamage{
 		return failText.get(textIndex);
 	}
 	
-	@Override
-	public Optional<EquippableItem> Equip() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
-	public boolean isEquipped() {
-		// TODO Auto-generated method stub
-		return false;
+	public String itemToString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name + System.lineSeparator());
+		sb.append("Physical Dmg: " + minPhysicalDamage + "-" + maxPhysicalDamage + System.lineSeparator());
+		sb.append("Magical Dmg: " + minMagicalDamage + "-" + maxMagicalDamage);
+		
+		return sb.toString();
 	}
 
 

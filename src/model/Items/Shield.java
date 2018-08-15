@@ -32,4 +32,14 @@ public class Shield extends EquippableItemHands implements HasArmor {
 	public ArmorClass getArmorClass() {
 		return armorClass;
 	}
+	
+	@Override
+	public String itemToString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name + System.lineSeparator());
+		sb.append("Physical Armor: " + physicalArmorRate + System.lineSeparator());
+		sb.append("Magic Resist: " + magicalArmorRate);
+		
+		return sb.toString();
+	}
 }

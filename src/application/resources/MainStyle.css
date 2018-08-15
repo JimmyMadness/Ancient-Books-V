@@ -9,7 +9,7 @@
 	-fx-font-family: Minecraft;	
 	-fx-text-fill: white;
 	-fx-prompt-text-fill: white;
-	-fx-effect: dropshadow(three-pass-box,#505050,1,1.0,2,2);
+	-fx-effect: dropshadow(one-pass-box,#505050,4,1,1,1);
 	
 }
 
@@ -39,7 +39,7 @@
 .button{
 	-fx-font-family: Minecraft;
 	-fx-shape:   "M0,0h10v10h-10v-10";
-	-fx-effect: dropshadow(one-pass-box,dimgrey,3,1.0,2,2);
+	-fx-effect: dropshadow(one-pass-box,dimgrey,1,1.0,2,2);
 	-fx-background-color: darkgrey;
 
 }
@@ -223,6 +223,7 @@
 	-fx-table-row-border-color: transparent;
 	-fx-border-color: transparent;
 	-fx-selection-bar :transparent;
+	-fx-selection-bar-non-focused: transparent;
 
 
 }
@@ -248,6 +249,11 @@
     /* 	-fx-selection-bar :yellow;
 	-fx-border-color: white;
 	-fx-border-width: 2px;*/
+}
+
+.table-view .table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-text-fill:#222222;
 }
 
 .table-view .table-row-cell{
@@ -300,6 +306,10 @@
 .table-view .scroll-bar .thumb{
 	-fx-shape:   "M0,0h10v10h-10v-10";
 	-fx-background-color:lightgrey;
+}
+
+.table-view .filler{
+	-fx-background-color: black;
 }
 
 
@@ -444,4 +454,15 @@
 .text-area .content{
 
 	-fx-background-color: black;
+
 }
+
+
+.tooltip{
+	-fx-text-fill: yellow;
+	-fx-background-radius: 0px;
+	-fx-border-color: darkgrey;
+	-fx-border-width: 5px;
+	-fx-wrap-text: true;
+}
+

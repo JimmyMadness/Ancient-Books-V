@@ -14,7 +14,9 @@ import java.util.List;
 
 import exceptions.LoadException;
 import model.*;
+import model.Items.InventoryEntry;
 import model.Items.Item;
+import model.Items.ShopEntry;
 
 public class GameController {
 
@@ -118,6 +120,17 @@ public class GameController {
 		}
 		return result;			
 		
+	}
+	
+	public List<InventoryEntry> getInventoryForTable(){
+		List <InventoryEntry> result = new ArrayList<InventoryEntry>();
+		for(Item i : character.getInventory().getItems()) {
+			result.add(new InventoryEntry(i.getName(),
+					i.getDescription(),
+					Collections.frequency(character.getInventory().getItems(), i)
+					));
+		}
+		return result;	
 	}
 	
 }

@@ -1,6 +1,6 @@
 package model.Items;
 
-import java.util.Optional;
+
 
 public class Armor extends EquippableItem {
 
@@ -38,16 +38,17 @@ public class Armor extends EquippableItem {
 		return armorClass;
 	}
 
-	@Override
-	public Optional<EquippableItem> Equip() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public boolean isEquipped() {
-		// TODO Auto-generated method stub
-		return false;
+	public String itemToString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name + System.lineSeparator());
+		sb.append("Physical Armor: " + physicalArmorRate + System.lineSeparator());
+		sb.append("Magic Resist: " + magicalArmorRate);
+		
+		return sb.toString();
 	}
+
+
 
 }

@@ -7,6 +7,8 @@ import java.util.Random;
 
 import model.character.Character;
 import model.Items.Item;
+import model.Items.ShopEntry;
+
 import java.util.List;
 
 public class Shop {

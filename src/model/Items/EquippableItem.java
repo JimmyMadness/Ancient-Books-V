@@ -1,6 +1,6 @@
 package model.Items;
 
-import java.util.Optional;
+
 
 public abstract class EquippableItem extends Item {
 
@@ -14,9 +14,12 @@ public abstract class EquippableItem extends Item {
 	}
 	
 	
-	// maybe?, more probably the item will be equipped from the inventory class to its internal loadout class, to indicate it as equipped
-	public abstract Optional<EquippableItem> Equip();
-	public abstract boolean isEquipped();	
+	@Override
+	public String toString() {
+		return itemToString();
+	}
+	
+	public abstract String itemToString();
 	
 
 }

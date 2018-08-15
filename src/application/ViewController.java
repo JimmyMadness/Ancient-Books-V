@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
-import java.util.Map;
 
 import exceptions.LoadException;
 import controller.GameController;
@@ -24,31 +23,42 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
+import javafx.geometry.Bounds;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
+
 import model.Location;
 import model.Save;
-import model.ShopEntry;
+import model.Items.InventoryEntry;
 import model.Items.Item;
+import model.Items.ShopEntry;
 import model.character.RpgClass;
 import model.character.Sex;
 import model.character.SkillsType;
@@ -1187,9 +1197,275 @@ public class ViewController {
 	public void toInventory(Event e) {
 		if (changeViewListener != null) {
 			changeViewListener.onChangeView(new ChangeViewEvent(this, Views.INVENTORY));
+
+		}
+	}
+	
+	//INVENTORY
+	
+	
+	@FXML
+	private Label inventoryChNameLabel;
+	@FXML
+	private Label inventoryChClassLabel;
+	@FXML
+	private Label inventoryChHpLabel;
+	@FXML
+	private Label inventoryChXpLabel;
+	@FXML 
+	private Label inventoryChGoldLabel;
+	@FXML
+	private Label inventoryChWeightLabel;
+	
+	@FXML
+	private ImageView inventoryHelmetImage;
+	
+	@FXML
+	private TableView<InventoryEntry> inventoryTableView;
+	
+	@FXML
+	private TableColumn<InventoryEntry, String> inventoryItemColumn;
+	@FXML
+	private TableColumn<InventoryEntry, String> inventoryDescriptionColumn;
+	@FXML
+	private TableColumn<InventoryEntry, Integer> inventoryQuantityColumn;
+	
+	@FXML
+	private ScrollPane inventoryHelmetPane;
+	@FXML
+	private ScrollPane inventoryChestPane;
+	@FXML
+	private ScrollPane inventoryRightHandPane;
+	@FXML
+	private ScrollPane inventoryLeftHandPane;
+	@FXML
+	private ScrollPane inventoryGauntletsPane;
+	@FXML
+	private ScrollPane inventoryLegsPane;
+	@FXML
+	private ScrollPane inventoryBootsPane;
+	
+	private Tooltip helmetTooltip;
+	private Tooltip chestTooltip;
+	private Tooltip gauntletsTooltip;
+	private Tooltip legsTooltip;
+	private Tooltip bootsTooltip;
+	private Tooltip rightHandTooltip;
+	private Tooltip leftHandTooltip;
+	private boolean test = true;
+	
+	public void initInventory() {
+		List<InventoryEntry> items = gameController.getInventoryForTable();
+		ObservableList<InventoryEntry> observableItems = FXCollections.observableArrayList(items);
+		inventoryTableView.setItems(observableItems);
+		if (test) {
+		//TOOLTIPS
+		
+		//HELMET
+		helmetTooltip = new Tooltip();
+		helmetTooltip.setOnShowing(s->{
+		    Bounds bounds = inventoryHelmetPane.localToScreen(inventoryHelmetPane.getBoundsInLocal());
+			helmetTooltip.setX(bounds.getMaxX());
+			helmetTooltip.setY(bounds.getMinY());
+		});
+		if (gameController.getCharacter().getInventory().getLoadout().getHelmet().isPresent())
+			helmetTooltip.setText(gameController.getCharacter().getInventory().getLoadout().getHelmet().get().toString());
+		else
+			helmetTooltip.setText("No helmet equipped");
+		helmetTooltip.setShowDelay(Duration.ZERO);
+		Tooltip.install(inventoryHelmetPane,helmetTooltip);
+		
+		
+		//CHEST
+		chestTooltip = new Tooltip();
+		chestTooltip.setOnShowing(s->{
+		    Bounds bounds = inventoryChestPane.localToScreen(inventoryChestPane.getBoundsInLocal());
+			chestTooltip.setX(bounds.getMaxX());
+			chestTooltip.setY(bounds.getMinY());
+		});
+		if (gameController.getCharacter().getInventory().getLoadout().getChest().isPresent())
+			chestTooltip.setText(gameController.getCharacter().getInventory().getLoadout().getChest().get().toString());
+		else
+			chestTooltip.setText("No armor equipped");
+		chestTooltip.setShowDelay(Duration.ZERO);
+		Tooltip.install(inventoryChestPane,chestTooltip);
+		
+		
+		//GAUNTLETS
+		gauntletsTooltip = new Tooltip();
+		gauntletsTooltip.setOnShowing(s->{
+		    Bounds bounds = inventoryGauntletsPane.localToScreen(inventoryGauntletsPane.getBoundsInLocal());
+			gauntletsTooltip.setX(bounds.getMaxX());
+			gauntletsTooltip.setY(bounds.getMinY());
+		});
+		if (gameController.getCharacter().getInventory().getLoadout().getGauntlets().isPresent())
+			gauntletsTooltip.setText(gameController.getCharacter().getInventory().getLoadout().getGauntlets().get().toString());
+		else
+			gauntletsTooltip.setText("No gauntlets equipped");
+		gauntletsTooltip.setShowDelay(Duration.ZERO);
+		Tooltip.install(inventoryGauntletsPane,gauntletsTooltip);
+		
+		
+		//LEGS
+		legsTooltip = new Tooltip();
+		legsTooltip.setOnShowing(s->{
+		    Bounds bounds = inventoryLegsPane.localToScreen(inventoryLegsPane.getBoundsInLocal());
+			legsTooltip.setX(bounds.getMaxX());
+			legsTooltip.setY(bounds.getMinY());
+		});
+		if (gameController.getCharacter().getInventory().getLoadout().getLegs().isPresent())
+			legsTooltip.setText(gameController.getCharacter().getInventory().getLoadout().getLegs().get().toString());
+		else
+			legsTooltip.setText("No legs armor equipped");
+		legsTooltip.setShowDelay(Duration.ZERO);
+		Tooltip.install(inventoryLegsPane,legsTooltip);
+		
+		
+		//BOOTS
+		bootsTooltip = new Tooltip();
+		bootsTooltip.setOnShowing(s->{
+		    Bounds bounds = inventoryBootsPane.localToScreen(inventoryBootsPane.getBoundsInLocal());
+			bootsTooltip.setX(bounds.getMaxX());
+			bootsTooltip.setY(bounds.getMinY());
+		});
+		if (gameController.getCharacter().getInventory().getLoadout().getBoots().isPresent())
+			bootsTooltip.setText(gameController.getCharacter().getInventory().getLoadout().getBoots().get().toString());
+		else
+			bootsTooltip.setText("No boots equipped");
+		bootsTooltip.setShowDelay(Duration.ZERO);
+		Tooltip.install(inventoryBootsPane,bootsTooltip);
+		
+		
+		//LEFT HAND
+		leftHandTooltip = new Tooltip();
+		leftHandTooltip.setOnShowing(s->{
+		    Bounds bounds = inventoryLeftHandPane.localToScreen(inventoryLeftHandPane.getBoundsInLocal());
+			leftHandTooltip.setX(bounds.getMaxX());
+			leftHandTooltip.setY(bounds.getMinY());
+		});
+		if (gameController.getCharacter().getInventory().getLoadout().getLeftHand().isPresent())
+			leftHandTooltip.setText(gameController.getCharacter().getInventory().getLoadout().getLeftHand().get().toString());
+		else
+			leftHandTooltip.setText("No right hand equipped");
+		leftHandTooltip.setShowDelay(Duration.ZERO);
+		Tooltip.install(inventoryLeftHandPane,leftHandTooltip);
+		
+		
+		//RIGHT HAND
+		rightHandTooltip = new Tooltip();
+		rightHandTooltip.setOnShowing(s->{
+		    Bounds bounds = inventoryRightHandPane.localToScreen(inventoryRightHandPane.getBoundsInLocal());
+			rightHandTooltip.setX(bounds.getMaxX());
+			rightHandTooltip.setY(bounds.getMinY());
+		});
+		if (gameController.getCharacter().getInventory().getLoadout().getRightHand().isPresent())
+			rightHandTooltip.setText(gameController.getCharacter().getInventory().getLoadout().getRightHand().get().toString());
+		else
+			rightHandTooltip.setText("No left hand equipped");
+		rightHandTooltip.setShowDelay(Duration.ZERO);
+		Tooltip.install(inventoryRightHandPane,rightHandTooltip);
+		
+
+		
+		inventoryChNameLabel.setText(gameController.getCharacter().getName());
+		inventoryChClassLabel.setText(gameController.getCharacter().getRpgClass() + " lvl " + gameController.getCharacter().getLvl());
+		inventoryChHpLabel.setText(gameController.getCharacter().getCurrentHP() + "/" + gameController.getCharacter().getMaxHP() + " Hp");
+		inventoryChXpLabel.setText(gameController.getCharacter().getXp() + " Xp");
+		inventoryChGoldLabel.setText("Gold: " + gameController.getCharacter().getGold() + "g");
+		inventoryChWeightLabel.setText("Weight: " + gameController.getCharacter().getInventory().getTotalWeight() + "/" 
+											+ gameController.getCharacter().getCharacteristics().getCarryWeight());
+		
+
+		
+		
+		/*inventoryItemColumn.setStyle("-fx-font-size: 15px;");
+		inventoryDescriptionColumn.setStyle("-fx-font-size: 32px;");
+		inventoryQuantityColumn.setStyle("-fx-font-size: 15px;");
+		*/
+		//text wrapping
+		inventoryItemColumn.setCellFactory(new Callback<TableColumn<InventoryEntry, String>, TableCell<InventoryEntry, String>>() {
+
+	       @Override
+	        public TableCell<InventoryEntry, String> call(
+	                TableColumn<InventoryEntry, String> param) {
+	            TableCell<InventoryEntry, String> cell = new TableCell<>();
+	            Text text = new Text();
+	            cell.setGraphic(text);
+	            
+	            cell.setOnMouseEntered(e ->{
+	            	text.setFill(Color.YELLOW);
+	            });
+	            cell.setOnMouseExited(e-> {
+	            	text.setFill(Color.WHITE);
+	            });
+	            text.wrappingWidthProperty().bind(cell.widthProperty());
+	            text.textProperty().bind(cell.itemProperty());
+	            text.setFill(Color.WHITE);
+	           // cell.setAlignment(Pos.CENTER_RIGHT);
+	            text.setTextAlignment(TextAlignment.CENTER);
+	            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+	            return cell ;
+	        }
+
+	    });
+
+		inventoryItemColumn.setCellValueFactory(new Callback<CellDataFeatures<InventoryEntry, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<InventoryEntry, String> entry) {
+		         return entry.getValue().getItemName();
+		     }
+		  });
+		
+		inventoryDescriptionColumn.setCellFactory(new Callback<TableColumn<InventoryEntry, String>, TableCell<InventoryEntry, String>>() {
+
+	        @Override
+	        public TableCell<InventoryEntry, String> call(
+	                TableColumn<InventoryEntry, String> param) {
+	            TableCell<InventoryEntry, String> cell = new TableCell<>();
+	            Text text = new Text();
+	            cell.setGraphic(text);
+	            text.wrappingWidthProperty().bind(cell.widthProperty());
+	            text.textProperty().bind(cell.itemProperty());
+	            text.setFill(Color.WHITE);
+	            text.setTextAlignment(TextAlignment.CENTER);
+	            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+	            return cell ;
+	        }
+
+	    });
+		
+		inventoryDescriptionColumn.setCellValueFactory(new Callback<CellDataFeatures<InventoryEntry, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<InventoryEntry, String> entry) {
+		         return entry.getValue().getItemDescription();
+		     }
+		  });
+		
+
+		
+		inventoryQuantityColumn.setCellValueFactory(new Callback<CellDataFeatures<InventoryEntry, Integer>, ObservableValue<Integer>>() {
+		     public ObservableValue<Integer> call(CellDataFeatures<InventoryEntry, Integer> entry) {
+		         return entry.getValue().getItemQuantity().asObject();
+		     }
+		  });
+		inventoryTableView.setVisible(false);
+		inventoryTableView.setVisible(true);
+
+		test = false;
 		}
 	}
 
+	@FXML
+	public void inventoryDropItemClicked(Event e) {
+		InventoryEntry entryToDrop = inventoryTableView.getSelectionModel().getSelectedItem();
+		if (entryToDrop != null) {
+				Item toDrop = gameController.getCharacter().getInventory().getItems().stream().filter(
+						item->item.getName().equals(entryToDrop.getItemName().get())).findFirst().get(); 
+				gameController.getCharacter().getInventory().remove(toDrop);
+				entryToDrop.getItemQuantity().setValue(entryToDrop.getItemQuantity().get()-1);
+				if (entryToDrop.getItemQuantity().get() <= 0)
+					inventoryTableView.getItems().remove(entryToDrop);
+		}
+	}
+	
 	@FXML
 	public void toGameView(Event e) {
 		if (changeViewListener != null) {
